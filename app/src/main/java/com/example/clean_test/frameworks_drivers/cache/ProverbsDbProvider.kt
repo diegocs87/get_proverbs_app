@@ -1,4 +1,4 @@
-package com.example.clean_test.cache
+package com.example.clean_test.frameworks_drivers.cache
 
 import com.example.clean_test.data.ProverbsProvider
 import com.example.clean_test.domain.model.Proverbs

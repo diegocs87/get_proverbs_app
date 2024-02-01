@@ -1,8 +1,5 @@
 package com.example.clean_test.presentation.view
 
-import android.content.Context
-import android.net.ConnectivityManager
-import android.net.NetworkInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -17,12 +14,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         mainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mainBinding.root)
-        onProverbsModelObserve()
-        onButtonDBClickListener()
-        onButtonAPIClickListener()
+        configureViewModelObserver()
+        configureClickListenerOnGetProverbsButton()
     }
 
-    private fun onProverbsModelObserve(){
+    private fun configureViewModelObserver(){
         proverbsViewModel.currentProverb.observe(this) { currentProverb ->
             mainBinding.msjTv.text = buildString {
                 append(currentProverb.proverb)
@@ -32,14 +28,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun onButtonDBClickListener(){
-        mainBinding.buttonDB.setOnClickListener {
-            proverbsViewModel.getProverbs()
-        }
-    }
-
-    private fun onButtonAPIClickListener(){
-        mainBinding.buttonAPI.setOnClickListener {
+    private fun configureClickListenerOnGetProverbsButton(){
+        mainBinding.getProverbsButton.setOnClickListener {
+            proverbsViewModel.update()
         }
     }
 }

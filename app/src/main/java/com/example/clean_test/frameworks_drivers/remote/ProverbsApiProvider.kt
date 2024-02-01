@@ -1,4 +1,4 @@
-package com.example.clean_test.remote
+package com.example.clean_test.frameworks_drivers.remote
 
 import com.example.clean_test.data.ProverbsProvider
 import com.example.clean_test.domain.model.Proverbs

@@ -1,6 +1,6 @@
-package com.example.clean_test.cache
+package com.example.clean_test.frameworks_drivers.cache
 
-import com.example.clean_test.cache.model.ProverbsDbModel
+import com.example.clean_test.frameworks_drivers.cache.model.ProverbsDbModel
 import com.example.clean_test.data.model.ProverbsDataModel
 
 class ProverbsDbMapper {

@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         proverbsViewModel.currentProverb.observe(this) { currentProverb ->
             mainBinding.msjTv.text = buildString {
                 append(currentProverb.proverb)
-                append(" src: ")
+                append(" src:  ")
                 append(currentProverb.src)
             }
         }

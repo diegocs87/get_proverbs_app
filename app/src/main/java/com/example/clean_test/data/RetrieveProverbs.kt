@@ -1,7 +1,7 @@
 package com.example.clean_test.data
 
-import com.example.clean_test.domain.model.Proverbs
+import com.example.clean_test.data.model.ProverbsDataModel
 
 interface RetrieveProverbs {
-    fun retrieveProverbs():List<Proverbs>
+    fun retrieveProverbs():List<ProverbsDataModel>
 }

@@ -14,6 +14,12 @@ interface ProverbsDbDao{
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAllProverbs(proverbsList: List<ProverbsDbModel>)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertSingleProverb(proverbsDbModel: ProverbsDbModel): Long
+
+    @Query("SELECT * FROM proverbs_table WHERE id = :proverbId")
+    fun getSingleProverb(proverbId: Int): ProverbsDbModel?
+
     @Query("DELETE FROM proverbs_table")
     fun deleteAllProverbs()
 }

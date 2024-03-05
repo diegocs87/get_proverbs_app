@@ -1,7 +1,8 @@
 package com.example.clean_test.data
 
-import com.example.clean_test.domain.model.Proverbs
+import android.content.Context
+import com.example.clean_test.data.model.ProverbsDataModel
 
 interface ProverbsProvider {
-    fun getProverbs():List<Proverbs>
+    suspend fun get(context: Context):List<ProverbsDataModel>
 }

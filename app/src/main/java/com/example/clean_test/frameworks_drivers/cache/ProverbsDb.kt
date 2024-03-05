@@ -19,9 +19,10 @@ abstract class ProverbsDb : RoomDatabase() {
         fun getInstance(context: Context): ProverbsDb {
             dbInstance?.let { return it }
             synchronized(this){
-                val newInstance = Room.databaseBuilder(context.applicationContext, ProverbsDb::class.java,
-                    DB_NAME
-                ).build()
+                val newInstance = Room.databaseBuilder(
+                    context.applicationContext,
+                    ProverbsDb::class.java,
+                    DB_NAME).build()
                 dbInstance = newInstance
                 return newInstance
             }

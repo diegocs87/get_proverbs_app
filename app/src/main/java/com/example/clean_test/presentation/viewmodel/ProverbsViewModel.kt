@@ -5,12 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.clean_test.domain.model.Proverbs
-import com.example.clean_test.presentation.factory.UseCaseFactory
+import com.example.clean_test.presentation.di.UseCaseCreator
 import kotlinx.coroutines.launch
 
 class ProverbsViewModel:ViewModel() {
     val currentProverb = MutableLiveData<Proverbs>()
-    private val getProverbsUseCase = UseCaseFactory().get()
+    private val getProverbsUseCase = UseCaseCreator().getProverbsUseCase()
     private lateinit var proverbsList: List<Proverbs>
 
     fun update(context: Context){

@@ -1,10 +1,10 @@
-package com.example.clean_test.presentation.factory
+package com.example.clean_test.presentation.di
 import com.example.clean_test.domain.usecase.GetProverbsUseCase
 import com.example.clean_test.domain.usecase.GetProverbsUseCaseImplementation
 
-class UseCaseFactory {
-    fun get(): GetProverbsUseCase {
-        val proverbsRepository = RepositoryFactory().get()
+class UseCaseCreator {
+    fun getProverbsUseCase(): GetProverbsUseCase {
+        val proverbsRepository = ProverbsRepositoryCreator().create()
         return GetProverbsUseCaseImplementation(proverbsRepository)
     }
 }

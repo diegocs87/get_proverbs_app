@@ -1,5 +1,6 @@
 package com.example.clean_test.domain.usecase
 
+import android.content.Context
 import com.example.clean_test.data.network.NetworkConnectionVerifier
 import com.example.clean_test.domain.ProverbsRepository
 import com.example.clean_test.domain.model.Proverbs
@@ -20,6 +21,7 @@ class GetProverbsUseCaseImplementationTest {
     private lateinit var getProverbsUseCaseImplementation:GetProverbsUseCaseImplementation
     private lateinit var localProverbsList:List<Proverbs>
     private lateinit var remoteProverbsList:List<Proverbs>
+    private val mockedContext = mockk<Context>(relaxed = true)
     @Before
     fun setUp(){
         MockKAnnotations.init(this)
@@ -27,9 +29,8 @@ class GetProverbsUseCaseImplementationTest {
         remoteProverbsList = listOf(Proverbs("proverb test 3","API"), Proverbs("proverb test 4","API"))
         proverbsRepository = mockk()
         networkConnectionVerifier = mockk()
-        getProverbsUseCaseImplementation = GetProverbsUseCaseImplementation(proverbsRepository,networkConnectionVerifier)
-        every { proverbsRepository.getLocal() } returns localProverbsList
-        every { proverbsRepository.getRemote() } returns remoteProverbsList
+        getProverbsUseCaseImplementation = GetProverbsUseCaseImplementation(proverbsRepository)
+        every { proverbsRepository.retrieveFromSource(mockedContext) } returns localProverbsList
     }
 
     @After

@@ -1,18 +1,33 @@
 package com.example.clean_test.presentation.viewmodel
 
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.clean_test.data.ProverbsRepositoryImplementation
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.clean_test.domain.model.Proverbs
-import com.example.clean_test.domain.usecase.GetProverbsUseCaseImplementation
+import com.example.clean_test.domain.usecase.GetProverbsUseCase
+import com.example.clean_test.presentation.di.UseCaseCreator
+import kotlinx.coroutines.launch
 
-class ProverbsViewModel:ViewModel() {
+class ProverbsViewModel(private val getProverbsUseCase: GetProverbsUseCase):ViewModel() {
     val currentProverb = MutableLiveData<Proverbs>()
-    private val getProverbsUseCase = GetProverbsUseCaseImplementation(ProverbsRepositoryImplementation())  // Está bien inyectar el repository desde el model?
-    lateinit var proverbsList: List<Proverbs>
+    private lateinit var proverbs: List<Proverbs>
 
-    fun getProverbs(){
-        proverbsList = getProverbsUseCase.getProverbs()
-        currentProverb.postValue(proverbsList[(proverbsList.indices).random()])
+    fun update(context: Context){
+        viewModelScope.launch { proverbs = getProverbsUseCase.get(context)
+            currentProverb.postValue(proverbs[(proverbs.indices).random()])
+        }
+    }
+
+    companion object {
+        val Factory: ViewModelProvider.Factory = viewModelFactory {
+            initializer {
+                val getProverbsUseCase = UseCaseCreator().getProverbsUseCase()
+                ProverbsViewModel(getProverbsUseCase)
+            }
+        }
     }
 }

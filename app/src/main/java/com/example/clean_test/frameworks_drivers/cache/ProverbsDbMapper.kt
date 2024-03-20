@@ -1,0 +1,7 @@
+package com.example.clean_test.frameworks_drivers.cache
+
+import com.example.clean_test.frameworks_drivers.cache.model.ProverbsDbModel
+import com.example.clean_test.data.model.ProverbsDataModel
+
+fun ProverbsDbModel.toDataModel() = ProverbsDataModel(proverb, src)
+fun ProverbsDataModel.toDB() = ProverbsDbModel(proverb = proverb, src = src)

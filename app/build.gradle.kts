@@ -62,4 +62,6 @@ dependencies {
     kapt ("androidx.room:room-compiler:2.5.0")
     // To use Kotlin Symbol Processing (KSP)
     implementation ("androidx.room:room-ktx:2.5.0")
+    // mockk
+    implementation ("io.mockk:mockk:1.12.0")
 }

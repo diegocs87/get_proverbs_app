@@ -11,7 +11,7 @@ class ProverbsRepositoryImplementation(private val localSource: ProverbsProvider
                                        private val remoteSource: ProverbsProvider,
                                        private val networkConnectionVerifier: NetworkConnectionVerifier):ProverbsRepository {
     override suspend fun retrieveFromSource(context: Context): List<Proverbs> {
-        return if(networkConnectionVerifier.verify()){
+        return if(networkConnectionVerifier.verify(context)){
             remoteSource.get(context).map { it.toDomain() }
         }else{
             localSource.get(context).map { it.toDomain() }

@@ -3,6 +3,7 @@ package com.example.clean_test.presentation.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import com.example.clean_test.data.network.NetworkConnectionVerifier
 import com.example.clean_test.data.network.NetworkConnectionVerifierImplementation
 import com.example.clean_test.databinding.ActivityMainBinding
 import com.example.clean_test.presentation.viewmodel.ProverbsViewModel
@@ -37,12 +38,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initListenerOnGetProverbsButton(){
-        val networkConnectionVerifierImplementation = NetworkConnectionVerifierImplementation()
         mainBinding.getProverbsButton.setOnClickListener {
             proverbsViewModel.update(this)
-            CoroutineScope(Dispatchers.IO).launch {
-                networkConnectionVerifierImplementation.verify(this@MainActivity)
-            }
         }
     }
 }

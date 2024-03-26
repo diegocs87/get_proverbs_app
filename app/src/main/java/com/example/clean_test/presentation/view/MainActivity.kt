@@ -3,8 +3,13 @@ package com.example.clean_test.presentation.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import com.example.clean_test.data.network.NetworkConnectionVerifier
+import com.example.clean_test.data.network.NetworkConnectionVerifierImplementation
 import com.example.clean_test.databinding.ActivityMainBinding
 import com.example.clean_test.presentation.viewmodel.ProverbsViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     private val proverbsViewModel: ProverbsViewModel by viewModels{ProverbsViewModel.Factory}

@@ -17,7 +17,8 @@ class ProverbsViewModel(private val getProverbsUseCase: GetProverbsUseCase):View
     private lateinit var proverbs: List<Proverbs>
 
     fun update(context: Context){
-        viewModelScope.launch { proverbs = getProverbsUseCase.get(context)
+        viewModelScope.launch {
+            proverbs = getProverbsUseCase.get(context)
             currentProverb.postValue(proverbs[(proverbs.indices).random()])
         }
     }

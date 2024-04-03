@@ -1,12 +1,55 @@
 package com.example.clean_test.data.network
 
-import org.junit.Assert.*
-
+import io.mockk.coEvery
+import io.mockk.coVerify
+import io.mockk.mockkStatic
+import io.mockk.unmockkAll
+import io.mockk.unmockkStatic
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
+import org.junit.After
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
+import org.junit.Before
 import org.junit.Test
+import java.net.InetAddress
+import java.net.UnknownHostException
 
 class NetworkConnectionVerifierImplementationTest {
 
+    private lateinit var networkConnectionVerifierSut: NetworkConnectionVerifier
+
+    @Before
+    fun setUp(){
+        networkConnectionVerifierSut = NetworkConnectionVerifierImplementation()
+    }
+
+    @After
+    fun tearDown(){
+        unmockkAll()
+    }
+
     @Test
-    fun verify() {
+    fun verify_successful(){
+        runBlocking {
+            val result = networkConnectionVerifierSut.verify()
+            assertTrue(result)
+        }
+    }
+
+    @Test(expected = UnknownHostException::class)
+    fun verify_with_host_exception() {
+        NetworkConnectionVerifierImplementation.TEST_DOMAIN = "test_fake_domain"
+        runBlocking {
+            val result = networkConnectionVerifierSut.verify()
+
+            assertFalse(result)
+        }
+        coVerify {
+            withContext(Dispatchers.IO) {
+                InetAddress.getByName(NetworkConnectionVerifierImplementation.TEST_DOMAIN)
+            }
+        }
     }
 }

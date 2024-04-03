@@ -8,7 +8,7 @@ import java.net.UnknownHostException
 class NetworkConnectionVerifierImplementation: NetworkConnectionVerifier {
     private lateinit var address:InetAddress
     companion object {
-        private const val TEST_DOMAIN = "www.google.com"
+        var TEST_DOMAIN = "www.google.com"
     }
     override suspend fun verify():Boolean {
         try {

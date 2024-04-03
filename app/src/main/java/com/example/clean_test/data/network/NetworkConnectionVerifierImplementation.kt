@@ -6,12 +6,13 @@ import java.net.InetAddress
 import java.net.UnknownHostException
 
 class NetworkConnectionVerifierImplementation: NetworkConnectionVerifier {
+    private lateinit var address:InetAddress
     companion object {
         private const val TEST_DOMAIN = "www.google.com"
     }
     override suspend fun verify():Boolean {
         try {
-            val address: InetAddress = withContext(Dispatchers.IO) {
+                address = withContext(Dispatchers.IO) {
                     InetAddress.getByName(TEST_DOMAIN)
             }
             return !address.equals("")

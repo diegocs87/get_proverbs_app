@@ -1,10 +1,7 @@
 package com.example.clean_test.data.network
 
-import io.mockk.coEvery
 import io.mockk.coVerify
-import io.mockk.mockkStatic
 import io.mockk.unmockkAll
-import io.mockk.unmockkStatic
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext

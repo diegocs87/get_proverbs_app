@@ -3,3 +3,23 @@
 build.gradle.kts,d/b/dbcff70658daf80b53ce624f6adcaa529df5ed8d
 C
 settings.gradle.kts,7/4/749edfcc96398253e5b3416184e95c46621da850
+P
+ app/src/main/AndroidManifest.xml,8/c/8c55c3ccc257e5907959013f99656e4c8ec3903e
+Š
+Zapp/src/main/java/com/example/clean_test/data/repository/factory/LocalRepositoryFactory.kt,c/f/cfd0922d2e3aabd6091746c963baa5eeba1e5ee3
+‹
+[app/src/main/java/com/example/clean_test/data/repository/factory/RemoteRepositoryFactory.kt,1/9/19cbf40f5a62130a8ecfe4b57795e0b4013b503a
+‰
+Yapp/src/main/java/com/example/clean_test/frameworks_drivers/remote/ProverbsApiProvider.kt,c/a/caf5b614aadb82513c1f974a660bd94b4354ebb4
+q
+Aapp/src/main/java/com/example/clean_test/data/ProverbsProvider.kt,f/4/f4dd530df3bdb07ea852678bd85436f046cfff1b
+y
+Iapp/src/main/java/com/example/clean_test/data/model/ProverbsDataMapper.kt,6/c/6cd868fa1edcd15453cb484f430c6e7c3d2d0928
+z
+Japp/src/main/java/com/example/clean_test/presentation/di/UseCaseCreator.kt,3/4/3471c9c07d75a26c17faec48af696f50df0767a9
+…
+Uapp/src/main/java/com/example/clean_test/presentation/di/ProverbsRepositoryCreator.kt,2/d/2d391e5bc3aec8f159339615007032cef74fc120
+x
+Happ/src/main/java/com/example/clean_test/data/model/ProverbsDataModel.kt,7/6/7693ff9720abb4c2b8b242d3551923d33930b401
+‡
+Wapp/src/main/java/com/example/clean_test/frameworks_drivers/cache/ProverbsDbProvider.kt,3/a/3a0efb1d4b89106a612a1321763da703d49753f3

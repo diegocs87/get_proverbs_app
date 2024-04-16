@@ -1,16 +1,21 @@
 package com.example.clean_test.data
 
 import android.content.Context
+import android.os.Handler
+import android.os.Looper
 import com.example.clean_test.data.network.NetworkConnectionVerifier
 import com.example.clean_test.data.repository.ProverbsRepositoryImplementation
 import com.example.clean_test.data.repository.factory.LocalRepositoryFactory
 import com.example.clean_test.data.repository.factory.RemoteRepositoryFactory
 import com.example.clean_test.domain.usecase.GetProverbsUseCaseImplementation
+import com.example.clean_test.presentation.di.UseCaseCreator
 import com.example.clean_test.presentation.viewmodel.ProverbsViewModel
 import io.mockk.coEvery
+import io.mockk.every
 import io.mockk.mockk
+import io.mockk.mockkStatic
+import io.mockk.unmockkAll
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
@@ -31,30 +36,30 @@ class ProverbsRepositoryImplementationTest {
     private val networkConnectionVerifierMock = mockk<NetworkConnectionVerifier>(relaxed = true)
     private val proverbsRepository = ProverbsRepositoryImplementation(localRepository,remoteRepository,networkConnectionVerifierMock)
     private val getProverbsUseCase = GetProverbsUseCaseImplementation(proverbsRepository)
+    private val proverbsUseCaseFromFactory = UseCaseCreator().getProverbsUseCase()
     private val mockedContext = mockk<Context>()
-    val dispatcher = TestCoroutineDispatcher()
+    private val dispatcher = TestCoroutineDispatcher()
+
     @Before
     fun setUp(){
         Dispatchers.setMain(dispatcher)
-        proverbsViewModel = ProverbsViewModel(getProverbsUseCase)
     }
 
     @After
     fun tearDown(){
+        unmockkAll()
         Dispatchers.resetMain()
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
-    fun getLocal() {
-        coEvery { networkConnectionVerifierMock.verify() } returns true
-        runTest {
-            proverbsViewModel.update(mockedContext)
-        }
+    fun getProverb(){
+        proverbsViewModel = ProverbsViewModel(proverbsUseCaseFromFactory)
+        proverbsViewModel.update(mockedContext)
     }
 
     @Test
     fun getRemote() {
+        proverbsViewModel = ProverbsViewModel(getProverbsUseCase)
         coEvery { networkConnectionVerifierMock.verify() } returns false
         runTest {
             proverbsViewModel.update(mockedContext)

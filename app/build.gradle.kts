@@ -50,6 +50,7 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
     // Activity
     implementation ("androidx.activity:activity-ktx:1.2.2")
     // ViewModel
@@ -64,4 +65,7 @@ dependencies {
     implementation ("androidx.room:room-ktx:2.5.0")
     // mockk
     implementation ("io.mockk:mockk:1.12.0")
+    // robolectric
+    testImplementation ("junit:junit:4.13.2")
+    testImplementation ("org.robolectric:robolectric:4.12.1")
 }

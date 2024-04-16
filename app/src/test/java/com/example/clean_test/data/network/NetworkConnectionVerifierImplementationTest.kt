@@ -2,8 +2,11 @@ package com.example.clean_test.data.network
 
 import io.mockk.coVerify
 import io.mockk.unmockkAll
+import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.withContext
 import org.junit.After
 import org.junit.Assert.assertFalse
@@ -28,7 +31,7 @@ class NetworkConnectionVerifierImplementationTest {
     }
 
     @Test
-    fun verify_successful(){
+    fun `When asking if internet connection is available, Given a valid network connection, Then the validation result should be true`(){
         runBlocking {
             val result = networkConnectionVerifierSut.verify()
             assertTrue(result)
@@ -47,6 +50,17 @@ class NetworkConnectionVerifierImplementationTest {
             withContext(Dispatchers.IO) {
                 InetAddress.getByName(NetworkConnectionVerifierImplementation.TEST_DOMAIN)
             }
+        }
+    }
+
+    private fun `Given a non existent domain`(){
+        NetworkConnectionVerifierImplementation.TEST_DOMAIN = "test_fake_domain"
+    }
+
+    private fun `Then the validation result should be false and unknownHostException`(){
+        runBlocking {
+            val result = networkConnectionVerifierSut.verify()
+            assertFalse(result)
         }
     }
 }

@@ -1,8 +1,6 @@
 package com.example.clean_test.data
 
 import android.content.Context
-import android.os.Handler
-import android.os.Looper
 import com.example.clean_test.data.network.NetworkConnectionVerifier
 import com.example.clean_test.data.repository.ProverbsRepositoryImplementation
 import com.example.clean_test.data.repository.factory.LocalRepositoryFactory
@@ -11,9 +9,7 @@ import com.example.clean_test.domain.usecase.GetProverbsUseCaseImplementation
 import com.example.clean_test.presentation.di.UseCaseCreator
 import com.example.clean_test.presentation.viewmodel.ProverbsViewModel
 import io.mockk.coEvery
-import io.mockk.every
 import io.mockk.mockk
-import io.mockk.mockkStatic
 import io.mockk.unmockkAll
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.test.TestCoroutineDispatcher
@@ -29,7 +25,7 @@ import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
 @RunWith(JUnit4::class)
-class ProverbsRepositoryImplementationTest {
+class ProverbsRepositoryImplementationIntegrationTest {
     private lateinit var proverbsViewModel:ProverbsViewModel
     private val localRepository = LocalRepositoryFactory().create()
     private val remoteRepository= RemoteRepositoryFactory().create()

@@ -52,15 +52,4 @@ class NetworkConnectionVerifierImplementationTest {
             }
         }
     }
-
-    private fun `Given a non existent domain`(){
-        NetworkConnectionVerifierImplementation.TEST_DOMAIN = "test_fake_domain"
-    }
-
-    private fun `Then the validation result should be false and unknownHostException`(){
-        runBlocking {
-            val result = networkConnectionVerifierSut.verify()
-            assertFalse(result)
-        }
-    }
 }

@@ -4,7 +4,7 @@ import android.content.Context
 import com.example.clean_test.data.ProverbsProvider
 import com.example.clean_test.data.model.ProverbsDataModel
 
-class ProverbsApiProvider(): ProverbsProvider {
+class ProverbsApiProvider: ProverbsProvider {
 
     private val proverbs = listOf( ProverbsDataModel("Dime con quién andas y te diré quién eres.","API"),
         ProverbsDataModel("Ojos que no ven, corazón que no siente.","API"),

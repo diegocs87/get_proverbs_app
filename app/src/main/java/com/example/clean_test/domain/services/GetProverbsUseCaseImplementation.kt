@@ -1,8 +1,8 @@
-package com.example.clean_test.domain.usecase
+package com.example.clean_test.domain.services
 
 import android.content.Context
 import com.example.clean_test.domain.ProverbsRepository
-import com.example.clean_test.domain.model.Proverbs
+import com.example.clean_test.domain.entities.Proverbs
 
 class GetProverbsUseCaseImplementation(private val proverbsRepository: ProverbsRepository):GetProverbsUseCase {
     override suspend fun get(context: Context):List<Proverbs> = proverbsRepository.retrieveFromSource(context)

@@ -7,8 +7,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import com.example.clean_test.domain.model.Proverbs
-import com.example.clean_test.domain.usecase.GetProverbsUseCase
+import com.example.clean_test.domain.entities.Proverbs
+import com.example.clean_test.domain.services.GetProverbsUseCase
 import com.example.clean_test.presentation.di.UseCaseCreator
 import kotlinx.coroutines.launch
 

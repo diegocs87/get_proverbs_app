@@ -1,6 +1,6 @@
 package com.example.clean_test.presentation.di
-import com.example.clean_test.domain.usecase.GetProverbsUseCase
-import com.example.clean_test.domain.usecase.GetProverbsUseCaseImplementation
+import com.example.clean_test.domain.services.GetProverbsUseCase
+import com.example.clean_test.domain.services.GetProverbsUseCaseImplementation
 
 class UseCaseCreator {
     fun getProverbsUseCase(): GetProverbsUseCase {

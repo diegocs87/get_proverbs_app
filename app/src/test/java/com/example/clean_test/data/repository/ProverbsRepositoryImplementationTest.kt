@@ -5,7 +5,7 @@ import com.example.clean_test.data.ProverbsProvider
 import com.example.clean_test.data.model.ProverbsDataModel
 import com.example.clean_test.data.model.toDomain
 import com.example.clean_test.data.network.NetworkConnectionVerifier
-import com.example.clean_test.domain.model.Proverbs
+import com.example.clean_test.domain.entities.Proverbs
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk

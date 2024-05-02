@@ -1,4 +1,4 @@
-package com.example.clean_test.domain.usecase
+package com.example.clean_test.domain.services
 
 import android.content.Context
 import com.example.clean_test.domain.ProverbsRepository

@@ -1,10 +1,9 @@
-package com.example.clean_test.frameworks_drivers.cache
+package com.example.clean_test.frameworks_drivers.cache.db
 
 import android.content.Context
 import com.example.clean_test.data.ProverbsProvider
 import com.example.clean_test.data.model.ProverbsDataModel
-import com.example.clean_test.frameworks_drivers.cache.db.ProverbsDb
-import com.example.clean_test.frameworks_drivers.cache.model.toDB
+import com.example.clean_test.frameworks_drivers.cache.db.model.toDB
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

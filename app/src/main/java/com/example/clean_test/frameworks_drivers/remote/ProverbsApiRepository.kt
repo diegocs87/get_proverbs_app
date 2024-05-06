@@ -12,8 +12,8 @@ import kotlinx.coroutines.withContext
 
 class ProverbsApiRepository(private val dispatcher: CoroutineDispatcher = Dispatchers.IO): ProverbsProvider {
     companion object{
-        private const val API_BASE_URL = "gs://proverbsapp-84836.appspot.com/"
-        val apiService: ProverbsAPIService = APIServiceProvider.invoke(API_BASE_URL).create(ProverbsAPIService::class.java)
+        private const val API_BASE_URL = "https://663822564253a866a24ce289.mockapi.io/proverbs/"
+        private val apiService: ProverbsAPIService = APIServiceProvider.invoke(API_BASE_URL).create(ProverbsAPIService::class.java)
     }
     override suspend fun get(context: Context):List<ProverbsDataModel> {
         return withContext(dispatcher){

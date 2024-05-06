@@ -5,6 +5,6 @@ import retrofit2.Response
 import retrofit2.http.GET
 
 interface ProverbsAPIService {
-    @GET("proverbs.json")
+    @GET("test")
     suspend fun getProverbsFromApi():Response<List<ProverbsApiResponse>>
 }

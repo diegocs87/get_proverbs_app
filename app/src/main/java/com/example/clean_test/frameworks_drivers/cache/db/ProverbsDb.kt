@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.clean_test.frameworks_drivers.cache.Dao.ProverbsDbDao
-import com.example.clean_test.frameworks_drivers.cache.model.ProverbsDbData
+import com.example.clean_test.frameworks_drivers.cache.db.Dao.ProverbsDbDao
+import com.example.clean_test.frameworks_drivers.cache.db.model.ProverbsDbData
 
 @Database(entities = [ProverbsDbData::class], version = 1, exportSchema = false)
 abstract class ProverbsDb : RoomDatabase() {

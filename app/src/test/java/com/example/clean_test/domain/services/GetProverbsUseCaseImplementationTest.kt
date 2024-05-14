@@ -1,7 +1,7 @@
 package com.example.clean_test.domain.services
 
 import android.content.Context
-import com.example.clean_test.domain.ProverbsRepository
+import com.example.clean_test.domain.repository.ProverbsRepositoryHandler
 import io.mockk.coVerify
 import io.mockk.mockk
 import io.mockk.unmockkAll
@@ -17,7 +17,7 @@ import org.junit.runners.JUnit4
 class GetProverbsUseCaseImplementationTest {
 
     private lateinit var getProverbsUseCaseImplementationSut: GetProverbsUseCaseImplementation
-    private val repositoryMock = mockk<ProverbsRepository>(relaxed = true)
+    private val repositoryMock = mockk<ProverbsRepositoryHandler>(relaxed = true)
     private val contextMock = mockk<Context>(relaxed = true)
 
     @Before

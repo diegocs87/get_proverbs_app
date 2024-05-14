@@ -2,10 +2,10 @@ package com.example.clean_test.framework_drivers
 
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
-import com.example.clean_test.frameworks_drivers.cache.db.Dao.ProverbsDbDao
-import com.example.clean_test.frameworks_drivers.cache.db.ProverbsDb
-import com.example.clean_test.frameworks_drivers.cache.db.ProverbsDbRepository
-import com.example.clean_test.frameworks_drivers.cache.db.model.ProverbsDbData
+import com.example.clean_test.data.db.dao.ProverbsDbDao
+import com.example.clean_test.data.db.ProverbsDb
+import com.example.clean_test.data.repository.local.ProverbsLocalDataSource
+import com.example.clean_test.data.db.model.ProverbsDbData
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert
@@ -18,12 +18,12 @@ import org.junit.runners.JUnit4
 class ProverbsDbTest {
     private lateinit var proverbsDbSut: ProverbsDb
     private lateinit var proverbsDbDao: ProverbsDbDao
-    private lateinit var proverbsDbRepositorySut: ProverbsDbRepository
+    private lateinit var proverbsLocalDataSourceSut: ProverbsLocalDataSource
     private val context = ApplicationProvider.getApplicationContext<Context>()
     @Before
     fun setUp(){
         proverbsDbSut = ProverbsDb.getInstance(context)
-        proverbsDbRepositorySut = ProverbsDbRepository()
+        proverbsLocalDataSourceSut = ProverbsLocalDataSource()
         proverbsDbDao = proverbsDbSut.proverbsDao()
     }
 
@@ -41,6 +41,6 @@ class ProverbsDbTest {
 
     @Test
     fun test2(){
-        runBlocking { proverbsDbRepositorySut.get(context) }
+        runBlocking { proverbsLocalDataSourceSut.get(context) }
     }
 }

@@ -1,10 +1,11 @@
 package com.example.clean_test.data.repository
 
 import android.content.Context
-import com.example.clean_test.data.ProverbsProvider
+import com.example.clean_test.data.ProverbsDataSource
 import com.example.clean_test.data.model.ProverbsDataModel
 import com.example.clean_test.data.model.toDomain
 import com.example.clean_test.data.network.NetworkConnectionVerifier
+import com.example.clean_test.data.repository.handler.ProverbsRepositoryHandlerImplementation
 import com.example.clean_test.domain.entities.Proverbs
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -19,10 +20,10 @@ import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
 @RunWith(JUnit4::class)
-class ProverbsRepositoryImplementationTest{
-    private lateinit var proverbsRepositoryImplementationSut: ProverbsRepositoryImplementation
-    private val localSourceMock = mockk<ProverbsProvider>(relaxed = true)
-    private val remoteSourceMock = mockk<ProverbsProvider>(relaxed = true)
+class ProverbsRepositoryHandlerImplementationTest{
+    private lateinit var proverbsRepositoryImplementationSut: ProverbsRepositoryHandlerImplementation
+    private val localSourceMock = mockk<ProverbsDataSource>(relaxed = true)
+    private val remoteSourceMock = mockk<ProverbsDataSource>(relaxed = true)
     private val networkConnectionVerifier = mockk <NetworkConnectionVerifier>(relaxed = true)
     private val contextMock = mockk<Context>(relaxed = true)
 
@@ -32,7 +33,7 @@ class ProverbsRepositoryImplementationTest{
     }
     @Before
     fun setUp(){
-        proverbsRepositoryImplementationSut = ProverbsRepositoryImplementation(localSourceMock,remoteSourceMock,networkConnectionVerifier)
+        proverbsRepositoryImplementationSut = ProverbsRepositoryHandlerImplementation(localSourceMock,remoteSourceMock,networkConnectionVerifier)
     }
 
     @After

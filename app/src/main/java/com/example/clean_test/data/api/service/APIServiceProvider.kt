@@ -1,4 +1,4 @@
-package com.example.clean_test.frameworks_drivers.remote.service
+package com.example.clean_test.data.api.service
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

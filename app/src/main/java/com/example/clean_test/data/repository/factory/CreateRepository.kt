@@ -1,7 +1,7 @@
 package com.example.clean_test.data.repository.factory
 
-import com.example.clean_test.data.ProverbsProvider
+import com.example.clean_test.data.ProverbsDataSource
 
 interface CreateRepository {
-    fun create():ProverbsProvider
+    fun create():ProverbsDataSource
 }

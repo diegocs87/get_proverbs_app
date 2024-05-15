@@ -1,11 +1,11 @@
-package com.example.clean_test.frameworks_drivers.cache.db
+package com.example.clean_test.data.db
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.clean_test.frameworks_drivers.cache.db.Dao.ProverbsDbDao
-import com.example.clean_test.frameworks_drivers.cache.db.model.ProverbsDbData
+import com.example.clean_test.data.db.dao.ProverbsDbDao
+import com.example.clean_test.data.db.model.ProverbsDbData
 
 @Database(entities = [ProverbsDbData::class], version = 1, exportSchema = false)
 abstract class ProverbsDb : RoomDatabase() {

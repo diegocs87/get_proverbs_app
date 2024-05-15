@@ -1,4 +1,4 @@
-package com.example.clean_test.frameworks_drivers.cache.db.model
+package com.example.clean_test.data.db.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

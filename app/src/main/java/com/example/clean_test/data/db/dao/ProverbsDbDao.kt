@@ -1,10 +1,10 @@
-package com.example.clean_test.frameworks_drivers.cache.db.Dao
+package com.example.clean_test.data.db.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.clean_test.frameworks_drivers.cache.db.model.ProverbsDbData
+import com.example.clean_test.data.db.model.ProverbsDbData
 
 @Dao
 interface ProverbsDbDao{

@@ -10,12 +10,9 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class ProverbsRemoteDataSource(private val dispatcher: CoroutineDispatcher = Dispatchers.IO): ProverbsDataSource {
-    companion object{
-        private const val API_BASE_URL = "https://663822564253a866a24ce289.mockapi.io/proverbs/"
-        private val apiService: ProverbsAPIService = APIServiceProvider.invoke(API_BASE_URL).create(
-            ProverbsAPIService::class.java)
-    }
+class ProverbsRemoteDataSource(private val dispatcher: CoroutineDispatcher = Dispatchers.IO,
+                               private val apiService: ProverbsAPIService): ProverbsDataSource {
+
     override suspend fun get(context: Context):List<ProverbsDataModel> {
         return withContext(dispatcher){
             val response = apiService.getProverbsFromApi()

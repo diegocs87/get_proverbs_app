@@ -22,6 +22,7 @@ class ProverbsLocalDataSource(private val coroutineDispatcher: CoroutineDispatch
     override suspend fun get(context: Context):List<ProverbsDataModel>{
         withContext(coroutineDispatcher){
             val dao = ProverbsDb.getInstance(context).proverbsDao()
+            dao.deleteAllProverbs()
             dao.insertAllProverbs(proverbs.map { it.toDB() })
         }
         return proverbs

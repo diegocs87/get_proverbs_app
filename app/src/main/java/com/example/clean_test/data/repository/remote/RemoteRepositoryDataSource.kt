@@ -1,8 +1,8 @@
-package com.example.clean_test.data
+package com.example.clean_test.data.repository.remote
 
 import android.content.Context
 import com.example.clean_test.data.model.ProverbsDataModel
 
-interface ProverbsDataSource {
+interface RemoteRepositoryDataSource {
     suspend fun get(context: Context):List<ProverbsDataModel>
 }

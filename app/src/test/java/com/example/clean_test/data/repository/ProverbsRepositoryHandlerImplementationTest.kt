@@ -1,7 +1,7 @@
 package com.example.clean_test.data.repository
 
 import android.content.Context
-import com.example.clean_test.data.ProverbsDataSource
+import com.example.clean_test.data.repository.remote.RemoteRepositoryDataSource
 import com.example.clean_test.data.model.ProverbsDataModel
 import com.example.clean_test.data.model.toDomain
 import com.example.clean_test.data.network.NetworkConnectionVerifier
@@ -22,8 +22,8 @@ import org.junit.runners.JUnit4
 @RunWith(JUnit4::class)
 class ProverbsRepositoryHandlerImplementationTest{
     private lateinit var proverbsRepositoryImplementationSut: ProverbsRepositoryHandlerImplementation
-    private val localSourceMock = mockk<ProverbsDataSource>(relaxed = true)
-    private val remoteSourceMock = mockk<ProverbsDataSource>(relaxed = true)
+    private val localSourceMock = mockk<RemoteRepositoryDataSource>(relaxed = true)
+    private val remoteSourceMock = mockk<RemoteRepositoryDataSource>(relaxed = true)
     private val networkConnectionVerifier = mockk <NetworkConnectionVerifier>(relaxed = true)
     private val contextMock = mockk<Context>(relaxed = true)
 

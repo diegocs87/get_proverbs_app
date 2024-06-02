@@ -7,7 +7,7 @@ import com.example.clean_test.databinding.ActivityMainBinding
 import com.example.clean_test.presentation.viewmodel.ProverbsViewModel
 
 class MainActivity : AppCompatActivity() {
-    private val proverbsViewModel: ProverbsViewModel by viewModels{ProverbsViewModel.Factory}
+    private val proverbsViewModel: ProverbsViewModel by viewModels()
     private lateinit var mainBinding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,30 +1,53 @@
 package com.example.clean_test.data.repository.local
 
-import android.content.Context
-import com.example.clean_test.data.ProverbsDataSource
-import com.example.clean_test.data.db.ProverbsDb
-import com.example.clean_test.data.model.ProverbsDataModel
+import com.example.clean_test.data.db.crud.Creator
+import com.example.clean_test.data.db.crud.Deleter
+import com.example.clean_test.data.db.crud.Reader
 import com.example.clean_test.data.db.model.toDB
+import com.example.clean_test.data.db.model.toDataModel
+import com.example.clean_test.data.model.ProverbsDataModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class ProverbsLocalDataSource(private val coroutineDispatcher: CoroutineDispatcher = Dispatchers.IO): ProverbsDataSource {
-    private val proverbs = listOf(
-        ProverbsDataModel("Más vale tarde que nunca.","DB"),
-        ProverbsDataModel("No dejes para mañana lo que puedas hacer hoy.","DB"),
-        ProverbsDataModel("El que mucho abarca, poco aprieta","DB"),
-        ProverbsDataModel("Camarón que se duerme se lo lleva la corriente","DB"),
-        ProverbsDataModel("En boca cerrada no entran moscas.","DB"),
-        ProverbsDataModel("No hay mal que por bien no venga.","DB")
-    )
+class ProverbsLocalDataSource(private val coroutineDispatcher: CoroutineDispatcher = Dispatchers.IO,
+                              private val localProverbsReader:Reader,
+                              private val localProverbsCreator:Creator,
+                              private val localProverbsDeleter: Deleter): LocalProverbsDataSource {
 
-    override suspend fun get(context: Context):List<ProverbsDataModel>{
-        withContext(coroutineDispatcher){
-            val dao = ProverbsDb.getInstance(context).proverbsDao()
-            dao.deleteAllProverbs()
-            dao.insertAllProverbs(proverbs.map { it.toDB() })
+    override suspend fun getAllProverbs(): List<ProverbsDataModel> {
+        return withContext(coroutineDispatcher){
+           localProverbsReader.getAll().map { proverbs -> proverbs.toDataModel() }
         }
-        return proverbs
+    }
+
+    override suspend fun getSingleProverb(proverbId: Int): ProverbsDataModel? {
+        return withContext(coroutineDispatcher){
+            localProverbsReader.getSingle(proverbId)?.toDataModel()
+        }
+    }
+
+    override suspend fun saveAll(proverbsList: List<ProverbsDataModel>, deleteBefore:Boolean) {
+        withContext(coroutineDispatcher){
+            if(deleteBefore){
+                localProverbsDeleter.deleteAllProverbs()
+            }
+            val proverbs = proverbsList.map { it.toDB() }
+            localProverbsCreator.insertAll(proverbs)
+        }
+    }
+
+    override suspend fun saveSingle(proverb: ProverbsDataModel) {
+        withContext(coroutineDispatcher){
+            localProverbsCreator.insertSingle(proverb.toDB())
+        }
+    }
+
+    override suspend fun deleteAllProverbs() {
+        localProverbsDeleter.deleteAllProverbs()
+    }
+
+    override suspend fun deleteSingleProverb(proverbId: Int) {
+        localProverbsDeleter.deleteSingleProverb(proverbId)
     }
 }

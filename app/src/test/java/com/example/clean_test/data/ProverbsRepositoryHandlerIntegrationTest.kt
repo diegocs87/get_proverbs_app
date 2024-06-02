@@ -3,8 +3,8 @@ package com.example.clean_test.data
 import android.content.Context
 import com.example.clean_test.data.network.NetworkConnectionVerifier
 import com.example.clean_test.data.repository.handler.ProverbsRepositoryHandlerImplementation
-import com.example.clean_test.data.repository.factory.LocalRepositoryFactory
-import com.example.clean_test.data.repository.factory.RemoteRepositoryFactory
+import com.example.clean_test.data.repository.factory.LocalRepositoryFactoryImpl
+import com.example.clean_test.data.repository.factory.RemoteRepositoryFactoryImpl
 import com.example.clean_test.domain.services.GetProverbsUseCaseImplementation
 import com.example.clean_test.presentation.viewmodel.ProverbsViewModel
 import io.mockk.coEvery
@@ -25,8 +25,8 @@ import org.junit.runners.JUnit4
 @RunWith(JUnit4::class)
 class ProverbsRepositoryHandlerIntegrationTest {
     private lateinit var proverbsViewModel:ProverbsViewModel
-    private val localRepository = LocalRepositoryFactory().create()
-    private val remoteRepository = RemoteRepositoryFactory().create()
+    private val localRepository = LocalRepositoryFactoryImpl().create()
+    private val remoteRepository = RemoteRepositoryFactoryImpl().create()
     private val networkConnectionVerifierMock = mockk<NetworkConnectionVerifier>(relaxed = true)
     private val proverbsRepository = ProverbsRepositoryHandlerImplementation(localRepository,remoteRepository,networkConnectionVerifierMock)
     private val getProverbsUseCase = GetProverbsUseCaseImplementation(proverbsRepository)

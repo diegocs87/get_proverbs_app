@@ -1,8 +1,7 @@
 package com.example.clean_test.data.repository.factory
 
-import com.example.clean_test.data.ProverbsDataSource
-import com.example.clean_test.data.repository.local.ProverbsLocalDataSource
+import com.example.clean_test.data.repository.local.LocalProverbsDataSource
 
-class LocalRepositoryFactory: CreateRepository {
-    override fun create():ProverbsDataSource = ProverbsLocalDataSource()
+interface LocalRepositoryFactory {
+    fun create():LocalProverbsDataSource
 }

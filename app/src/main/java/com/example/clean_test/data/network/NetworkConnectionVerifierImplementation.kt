@@ -1,12 +1,13 @@
 package com.example.clean_test.data.network
 
+import com.example.clean_test.presentation.di.qualifiers.IODispatcher
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.net.InetAddress
 import java.net.UnknownHostException
+import javax.inject.Inject
 
-class NetworkConnectionVerifierImplementation(private val dispatcher: CoroutineDispatcher = Dispatchers.IO): NetworkConnectionVerifier {
+class NetworkConnectionVerifierImplementation @Inject constructor(@IODispatcher private val dispatcher: CoroutineDispatcher): NetworkConnectionVerifier {
     private lateinit var address:InetAddress
     companion object {
         var TEST_DOMAIN = "www.google.com"

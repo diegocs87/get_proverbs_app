@@ -6,14 +6,18 @@ import com.example.clean_test.data.db.crud.Reader
 import com.example.clean_test.data.db.model.toDB
 import com.example.clean_test.data.db.model.toDataModel
 import com.example.clean_test.data.model.ProverbsDataModel
+import com.example.clean_test.data.di.qualifiers.GetLocalProverbsCreatorImplementationQualifier
+import com.example.clean_test.data.di.qualifiers.GetLocalProverbsDeleterImplementationQualifier
+import com.example.clean_test.data.di.qualifiers.GetLocalProverbsReaderImplementationQualifier
+import com.example.clean_test.presentation.di.qualifiers.IODispatcher
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class ProverbsLocalDataSource(private val coroutineDispatcher: CoroutineDispatcher = Dispatchers.IO,
-                              private val localProverbsReader:Reader,
-                              private val localProverbsCreator:Creator,
-                              private val localProverbsDeleter: Deleter): LocalProverbsDataSource {
+class ProverbsLocalDataSource @Inject constructor(@IODispatcher private val coroutineDispatcher: CoroutineDispatcher,
+                                                  @GetLocalProverbsReaderImplementationQualifier private val localProverbsReader:Reader,
+                                                  @GetLocalProverbsCreatorImplementationQualifier private val localProverbsCreator:Creator,
+                                                  @GetLocalProverbsDeleterImplementationQualifier private val localProverbsDeleter: Deleter): LocalProverbsDataSource {
 
     override suspend fun getAllProverbs(): List<ProverbsDataModel> {
         return withContext(coroutineDispatcher){

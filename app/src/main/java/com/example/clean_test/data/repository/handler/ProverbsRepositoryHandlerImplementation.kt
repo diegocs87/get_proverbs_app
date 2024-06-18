@@ -7,11 +7,16 @@ import com.example.clean_test.data.network.NetworkConnectionVerifier
 import com.example.clean_test.data.repository.local.LocalProverbsDataSource
 import com.example.clean_test.domain.repository.ProverbsRepositoryHandler
 import com.example.clean_test.domain.entities.Proverbs
+import com.example.clean_test.data.di.qualifiers.GetLocalProverbsDataSourceImplementationQualifier
+import com.example.clean_test.data.di.qualifiers.GetNetworkConnectionVerifierImplementationQualifier
+import com.example.clean_test.data.di.qualifiers.GetProverbsRemoteDataSourceImplementationQualifier
+import javax.inject.Inject
 
-    class ProverbsRepositoryHandlerImplementation(private val localSource: LocalProverbsDataSource,
-                                                  private val remoteSource: RemoteRepositoryDataSource,
-                                                  private val networkConnectionVerifier: NetworkConnectionVerifier):
-        ProverbsRepositoryHandler {
+class ProverbsRepositoryHandlerImplementation @Inject constructor(@GetLocalProverbsDataSourceImplementationQualifier private val localSource: LocalProverbsDataSource,
+                                                                  @GetProverbsRemoteDataSourceImplementationQualifier private val remoteSource: RemoteRepositoryDataSource,
+                                                                  @GetNetworkConnectionVerifierImplementationQualifier private val networkConnectionVerifier: NetworkConnectionVerifier)
+                                                : ProverbsRepositoryHandler {
+
     override suspend fun retrieveFromSource(context: Context): List<Proverbs> {
         return if(networkConnectionVerifier.verify()){
             val proverbs = remoteSource.get(context)

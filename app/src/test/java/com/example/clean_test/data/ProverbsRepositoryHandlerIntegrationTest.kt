@@ -3,8 +3,6 @@ package com.example.clean_test.data
 import android.content.Context
 import com.example.clean_test.data.network.NetworkConnectionVerifier
 import com.example.clean_test.data.repository.handler.ProverbsRepositoryHandlerImplementation
-import com.example.clean_test.data.repository.factory.LocalRepositoryFactoryImpl
-import com.example.clean_test.data.repository.factory.RemoteRepositoryFactoryImpl
 import com.example.clean_test.domain.services.GetProverbsUseCaseImplementation
 import com.example.clean_test.presentation.viewmodel.ProverbsViewModel
 import io.mockk.coEvery

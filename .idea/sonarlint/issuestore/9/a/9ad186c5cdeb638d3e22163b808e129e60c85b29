@@ -1,0 +1,33 @@
+
+u
+java:S2293†"YReplace the type specification in this constructor call with the diamond operator ("<>").(›Ã½©ùÿÿÿÿ
+f	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ğë²»
+f	java:S117V"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Â›õ
+f	java:S117a"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(†áÏ
+f	java:S117b"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(šºî€
+k	java:S117q"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Äğ¡–øÿÿÿÿ
+k	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(İ×—³ùÿÿÿÿ
+f	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‹§>
+l	java:S117†"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(›Ã½©ùÿÿÿÿ
+g	java:S117ˆ"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(åËá
+g	java:S117¤"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ú†í
+g	java:S117¥"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(šºî€
+f	java:S117¨"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‹§>
+g	java:S117­"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(–—Ë
+y
+java:S14888"^Immediately return this expression instead of assigning it to the temporary variable "_query".(«Ü¶áùÿÿÿÿ
+y
+java:S1488?"^Immediately return this expression instead of assigning it to the temporary variable "_query".(³Àƒäÿÿÿÿÿ
+g	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(ˆİ¼†ÿÿÿÿÿ
+g
+java:S1128"QRemove this unnecessary import: java.lang classes are always implicitly imported.(ùÃÌé
+g
+java:S1128"QRemove this unnecessary import: java.lang classes are always implicitly imported.(ú®Ú±
+l
+java:S1128"QRemove this unnecessary import: java.lang classes are always implicitly imported.(ôİÕıÿÿÿÿ
+l
+java:S1128"QRemove this unnecessary import: java.lang classes are always implicitly imported.(¤î˜Óüÿÿÿÿ
+d	java:S116"ORename this field "__db" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(àÛôÇ
+‡	java:S116"mRename this field "__insertionAdapterOfProverbsDbData" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(•Îâüÿÿÿÿ
+ˆ	java:S116"nRename this field "__preparedStmtOfDeleteSingleProverb" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¡ë‹¸ûÿÿÿÿ
+†	java:S116"lRename this field "__preparedStmtOfDeleteAllProverbs" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‡µ¹ßøÿÿÿÿ

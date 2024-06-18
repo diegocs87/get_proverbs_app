@@ -2,11 +2,8 @@ package com.example.clean_test.data.network
 
 import io.mockk.coVerify
 import io.mockk.unmockkAll
-import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.withContext
 import org.junit.After
 import org.junit.Assert.assertFalse
@@ -22,7 +19,7 @@ class NetworkConnectionVerifierImplementationTest {
 
     @Before
     fun setUp(){
-        networkConnectionVerifierSut = NetworkConnectionVerifierImplementation()
+        //networkConnectionVerifierSut = NetworkConnectionVerifierImplementation()
     }
 
     @After

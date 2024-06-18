@@ -2,4 +2,11 @@
 plugins {
     id("com.android.application") version "8.1.1" apply false
     id("org.jetbrains.kotlin.android") version "1.9.0" apply false
+    id("com.google.dagger.hilt.android") version "2.50" apply false
+}
+
+ext {
+    set("hilt_version", "2.50")
+    set("retrofit_version", "2.9.0")
+    set("room_version", "2.5.0")
 }

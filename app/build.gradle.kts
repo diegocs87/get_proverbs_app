@@ -4,6 +4,7 @@ plugins {
     id ("kotlin-parcelize")
     id ("kotlin-android")
     id ("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -58,17 +59,22 @@ dependencies {
     // LiveData
     implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.3.1")
     // Room
-    implementation ("androidx.room:room-runtime:2.5.0")
-    // To use Kotlin annotation processing tool (kapt)
-    kapt ("androidx.room:room-compiler:2.5.0")
-    // To use Kotlin Symbol Processing (KSP)
-    implementation ("androidx.room:room-ktx:2.5.0")
+    implementation ("androidx.room:room-runtime:${rootProject.extra["room_version"]}")
+    kapt ("androidx.room:room-compiler:${rootProject.extra["room_version"]}")
+    implementation ("androidx.room:room-ktx:${rootProject.extra["room_version"]}")
     // mockk
     implementation ("io.mockk:mockk:1.12.0")
     // robolectric
     testImplementation ("junit:junit:4.13.2")
     testImplementation ("org.robolectric:robolectric:4.12.1")
     // Retrofit
-    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation ("com.squareup.retrofit2:retrofit:${rootProject.extra["retrofit_version"]}")
+    implementation ("com.squareup.retrofit2:converter-gson:${rootProject.extra["retrofit_version"]}")
+    // Dagger Hilt
+    implementation("com.google.dagger:hilt-android:${rootProject.extra["hilt_version"]}")
+    kapt("com.google.dagger:hilt-android-compiler:${rootProject.extra["hilt_version"]}")
+}
+
+kapt {
+    correctErrorTypes = true
 }

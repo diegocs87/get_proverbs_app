@@ -1,8 +1,14 @@
 package com.example.clean_test.data
 
 import android.content.Context
+import com.example.clean_test.data.api.service.ProverbsAPIService
+import com.example.clean_test.data.db.crud.Creator
+import com.example.clean_test.data.db.crud.Deleter
+import com.example.clean_test.data.db.crud.Reader
 import com.example.clean_test.data.network.NetworkConnectionVerifier
 import com.example.clean_test.data.repository.handler.ProverbsRepositoryHandlerImplementation
+import com.example.clean_test.data.repository.local.ProverbsLocalDataSource
+import com.example.clean_test.data.repository.remote.ProverbsRemoteDataSource
 import com.example.clean_test.domain.services.GetProverbsUseCaseImplementation
 import com.example.clean_test.presentation.viewmodel.ProverbsViewModel
 import io.mockk.coEvery
@@ -23,8 +29,12 @@ import org.junit.runners.JUnit4
 @RunWith(JUnit4::class)
 class ProverbsRepositoryHandlerIntegrationTest {
     private lateinit var proverbsViewModel:ProverbsViewModel
-    private val localRepository = LocalRepositoryFactoryImpl().create()
-    private val remoteRepository = RemoteRepositoryFactoryImpl().create()
+    private val mockApiService = mockk<ProverbsAPIService>(relaxed = true)
+    private val mockLocalProverbsReader = mockk<Reader>(relaxed = true)
+    private val mockLocalProverbsCreator = mockk<Creator>(relaxed = true)
+    private val mockLocalProverbsDeleter = mockk<Deleter>(relaxed = true)
+    private val localRepository = ProverbsLocalDataSource(Dispatchers.IO,mockLocalProverbsReader,mockLocalProverbsCreator,mockLocalProverbsDeleter)
+    private val remoteRepository = ProverbsRemoteDataSource(Dispatchers.IO,mockApiService)
     private val networkConnectionVerifierMock = mockk<NetworkConnectionVerifier>(relaxed = true)
     private val proverbsRepository = ProverbsRepositoryHandlerImplementation(localRepository,remoteRepository,networkConnectionVerifierMock)
     private val getProverbsUseCase = GetProverbsUseCaseImplementation(proverbsRepository)

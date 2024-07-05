@@ -6,6 +6,7 @@ import com.example.clean_test.data.model.ProverbsDataModel
 import com.example.clean_test.data.model.toDomain
 import com.example.clean_test.data.network.NetworkConnectionVerifier
 import com.example.clean_test.data.repository.handler.ProverbsRepositoryHandlerImplementation
+import com.example.clean_test.data.repository.local.LocalProverbsDataSource
 import com.example.clean_test.domain.entities.Proverbs
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -22,7 +23,7 @@ import org.junit.runners.JUnit4
 @RunWith(JUnit4::class)
 class ProverbsRepositoryHandlerImplementationTest{
     private lateinit var proverbsRepositoryImplementationSut: ProverbsRepositoryHandlerImplementation
-    private val localSourceMock = mockk<RemoteRepositoryDataSource>(relaxed = true)
+    private val localSourceMock = mockk<LocalProverbsDataSource>(relaxed = true)
     private val remoteSourceMock = mockk<RemoteRepositoryDataSource>(relaxed = true)
     private val networkConnectionVerifier = mockk <NetworkConnectionVerifier>(relaxed = true)
     private val contextMock = mockk<Context>(relaxed = true)
@@ -64,7 +65,7 @@ class ProverbsRepositoryHandlerImplementationTest{
     }
 
     private fun `Given a retrieved proverbs list with data model structure`() {
-        coEvery { localSourceMock.get(contextMock) } returns PROVERBS_DATA_MODEL_STUB_LIST
+        coEvery { localSourceMock.getAllProverbs() } returns PROVERBS_DATA_MODEL_STUB_LIST
     }
 
     private fun `Given a device with no internet connection`(){
@@ -85,7 +86,7 @@ class ProverbsRepositoryHandlerImplementationTest{
     }
 
     private fun `Then proverbs have to be retrieved and mapped from local source`(){
-        coVerify(exactly = 1) { localSourceMock.get(contextMock).map { proverbsList -> proverbsList.toDomain() } }
+        coVerify(exactly = 1) { localSourceMock.getAllProverbs().map { proverbsList -> proverbsList.toDomain() } }
     }
 
     private fun `Then proverbs have to be mapped into a domain model List`(mappedProverbsList:List<Proverbs>) {

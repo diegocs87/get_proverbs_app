@@ -1,4 +1,4 @@
-package com.example.clean_test.framework_drivers
+package com.example.clean_test.data.db
 
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
@@ -20,6 +20,7 @@ class ProverbsDbTest {
 //    private lateinit var proverbsDbDao: ProverbsDbDao
 //    private lateinit var proverbsLocalDataSourceSut: ProverbsLocalDataSource
 //    private val context = ApplicationProvider.getApplicationContext<Context>()
+//
 //    @Before
 //    fun setUp(){
 //        proverbsDbSut = ProverbsDb.getInstance(context)

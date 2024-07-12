@@ -1,7 +1,6 @@
 package com.example.clean_test.data.db
 
 import android.content.Context
-import androidx.test.core.app.ApplicationProvider
 import com.example.clean_test.data.db.dao.ProverbsDbDao
 import com.example.clean_test.data.db.ProverbsDb
 import com.example.clean_test.data.repository.local.ProverbsLocalDataSource

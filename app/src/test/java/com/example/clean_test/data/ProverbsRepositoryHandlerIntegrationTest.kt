@@ -56,13 +56,13 @@ class ProverbsRepositoryHandlerIntegrationTest {
     }
 
     @Test
-    fun `When retrieve proverbs, Given internet connection, Then proverbs should be retrieved from remote source`() {
+    fun `When retrieving proverbs, Given internet connection, Then proverbs should be retrieved from remote source`() {
         `Given internet connection`()
         `When retrieve proverbs`()
     }
 
     @Test
-    fun `When retrieve proverbs, Given no internet connection, Then proverbs should be retrieved from local source`() {
+    fun `When retrieving proverbs, Given no internet connection, Then proverbs should be retrieved from local source`() {
         `Given no internet connection`()
         `When retrieve proverbs`()
     }

@@ -19,7 +19,7 @@ class NetworkConnectionVerifierImplementationTest {
 
     @Before
     fun setUp(){
-        //networkConnectionVerifierSut = NetworkConnectionVerifierImplementation()
+        networkConnectionVerifierSut = NetworkConnectionVerifierImplementation(Dispatchers.IO)
     }
 
     @After

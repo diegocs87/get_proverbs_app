@@ -1,6 +1,9 @@
 package com.example.clean_test.presentation.viewmodel
 
 import android.content.Context
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -10,18 +13,29 @@ import com.example.clean_test.presentation.di.qualifiers.GetProverbsUseCaseImple
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.random.Random
 
 @HiltViewModel
 class ProverbsViewModel
     @Inject constructor(@GetProverbsUseCaseImplementationQualifier private val getProverbsUseCase:GetProverbsUseCase)
     :ViewModel() {
-    val currentProverb = MutableLiveData<List<Proverbs>>()
+    private var randomProverb = Proverbs("","")
+    private val _currentProverb = mutableStateOf(randomProverb)
+    val currentProverb: State<Proverbs> = _currentProverb
+
     private lateinit var proverbs: List<Proverbs>
 
     fun update(context: Context){
         viewModelScope.launch {
             proverbs = getProverbsUseCase.get(context)
-            currentProverb.postValue(proverbs)
+            updateCurrentProverbWithRetrievedData()
         }
+    }
+
+    private fun updateCurrentProverbWithRetrievedData() {
+        if (proverbs.isNotEmpty()) {
+            randomProverb = proverbs[(proverbs.indices).random()]
+        }
+        _currentProverb.value = randomProverb
     }
 }

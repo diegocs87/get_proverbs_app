@@ -1,4 +1,4 @@
-package com.example.clean_test.presentation.view.theme
+package com.example.clean_test.presentation.view.ui_compose.theme
 
 import androidx.compose.ui.graphics.Color
 

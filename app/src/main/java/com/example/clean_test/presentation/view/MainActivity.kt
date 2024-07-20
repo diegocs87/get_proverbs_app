@@ -4,27 +4,27 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
-import androidx.compose.material.Button
-import androidx.compose.material.Text
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ElevatedButton
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight.Companion.Bold
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.clean_test.databinding.ActivityMainBinding
 import com.example.clean_test.domain.entities.Proverbs
+import com.example.clean_test.presentation.view.theme.CustomViolet
 import com.example.clean_test.presentation.viewmodel.ProverbsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -46,8 +46,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initComposeView(proverbsViewModel: ProverbsViewModel){
-
-        //val currentProverb = proverbsList[(proverbsList.indices).random()]
         composeView.setContent {
             ProverbsScreen(proverbsViewModel = proverbsViewModel)
         }
@@ -57,13 +55,17 @@ class MainActivity : AppCompatActivity() {
     private fun ProverbsScreen(proverbsViewModel: ProverbsViewModel){
         val currentProverb by proverbsViewModel.currentProverb
         Column(modifier = Modifier.fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally) {
-            Spacer(modifier = Modifier.height(30.dp))
-            Button(onClick = { proverbsViewModel.update(this@MainActivity)}) {
-
-            }
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
             showToastIfProverbIsEmpty(currentProverb)
-            Text(text = getProverbStringFormat(currentProverb))
+            Text(text = getProverbStringFormat(currentProverb), fontWeight = Bold, fontSize = 30.sp)
+            Spacer(modifier = Modifier.height(40.dp))
+            ElevatedButton(onClick = { proverbsViewModel.update(this@MainActivity)}, colors = ButtonDefaults.buttonColors(containerColor = CustomViolet)) {
+                Text("Get Proverbs",
+                    color = Color.White,
+                    fontFamily = FontFamily.SansSerif)
+            }
         }
     }
 

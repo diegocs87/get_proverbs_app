@@ -8,24 +8,28 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.example.clean_test.presentation.utils.ProverbsUtils.getProverbStringFormat
-import com.example.clean_test.presentation.utils.ProverbsUtils.showToastIfProverbIsEmpty
-import com.example.clean_test.presentation.view.ui_compose.composables.TextLabelWithElevatedButton
+import com.example.clean_test.presentation.view.ui_compose.composables.CardsLazyColumnView
+import com.example.clean_test.presentation.view.ui_compose.composables.GetProverbsElevatedButton
 import com.example.clean_test.presentation.view.ui_compose.theme.CustomViolet
 import com.example.clean_test.presentation.viewmodel.ProverbsViewModel
 
 object ProverbsMainScreen {
 
     @Composable
-    fun Screen(proverbsViewModel: ProverbsViewModel, context: Context){
-        val currentProverb by proverbsViewModel.currentProverb
-        Column(modifier = Modifier.fillMaxSize(),
+    fun Show(proverbsViewModel: ProverbsViewModel, context: Context) {
+        val proverbsList by proverbsViewModel.proverbsList
+        Column(
+            modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            currentProverb.showToastIfProverbIsEmpty(currentProverb,context)
-            TextLabelWithElevatedButton(onButtonClick = { proverbsViewModel.update(context) }, buttonColor = CustomViolet,
-                buttonText = "Get Proverbs", labelText = currentProverb.getProverbStringFormat(currentProverb))
+            CardsLazyColumnView(proverbsList = proverbsList)
+
+            GetProverbsElevatedButton(
+                onButtonClick = { proverbsViewModel.update(context) },
+                buttonColor = CustomViolet,
+                buttonText = "Get Proverbs",
+            )
         }
     }
 }

@@ -8,31 +8,36 @@ import androidx.lifecycle.viewModelScope
 import com.example.clean_test.domain.entities.Proverbs
 import com.example.clean_test.domain.services.GetProverbsUseCase
 import com.example.clean_test.presentation.di.qualifiers.GetProverbsUseCaseImplementationQualifier
+import com.example.clean_test.presentation.di.qualifiers.IODispatcher
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
 class ProverbsViewModel
-    @Inject constructor(@GetProverbsUseCaseImplementationQualifier private val getProverbsUseCase:GetProverbsUseCase)
-    :ViewModel() {
-    private var randomProverb = Proverbs("","")
-    private val _currentProverb = mutableStateOf(randomProverb)
-    val currentProverb: State<Proverbs> = _currentProverb
-
+@Inject constructor(
+    @GetProverbsUseCaseImplementationQualifier private val getProverbsUseCase: GetProverbsUseCase,
+    @IODispatcher private val dispatcher: CoroutineDispatcher
+) : ViewModel() {
+    private var randomProverb = emptyList<Proverbs>()
+    private val _proverbsList = mutableStateOf(randomProverb)
+    val proverbsList: State<List<Proverbs>> get() = _proverbsList
     private lateinit var proverbs: List<Proverbs>
 
     fun update(context: Context){
         viewModelScope.launch {
-            proverbs = getProverbsUseCase.get(context)
+            withContext(dispatcher) {
+                proverbs = getProverbsUseCase.get(context)
+            }
             updateCurrentProverbWithRetrievedData()
         }
     }
 
     private fun updateCurrentProverbWithRetrievedData() {
         if (proverbs.isNotEmpty()) {
-            randomProverb = proverbs[(proverbs.indices).random()]
+            _proverbsList.value = proverbs
         }
-        _currentProverb.value = randomProverb
     }
 }

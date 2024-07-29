@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initView(proverbsViewModel: ProverbsViewModel){
         composeView.setContent {
-            proverbsMainScreen.Screen(proverbsViewModel = proverbsViewModel, context = this@MainActivity)
+            proverbsMainScreen.Show(proverbsViewModel = proverbsViewModel, context = this@MainActivity)
         }
     }
 }

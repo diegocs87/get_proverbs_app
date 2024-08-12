@@ -1,11 +1,11 @@
 package com.example.clean_test.presentation.view
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.ui.platform.ComposeView
 import com.example.clean_test.databinding.ActivityMainBinding
-import com.example.clean_test.domain.entities.Proverbs
+import com.example.clean_test.presentation.view.ui_compose.screens.ProverbsMainScreen
 import com.example.clean_test.presentation.viewmodel.ProverbsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -13,6 +13,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private val proverbsViewModel: ProverbsViewModel by viewModels()
     private lateinit var mainBinding: ActivityMainBinding
+    private lateinit var composeView: ComposeView
+    private lateinit var proverbsMainScreen: ProverbsMainScreen
     companion object{
         const val ON_EMPTY_PROVERB_MESSAGE = "No proverbs available, please try again."
     }
@@ -20,41 +22,15 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mainBinding = ActivityMainBinding.inflate(layoutInflater)
+        composeView = mainBinding.mainComposeContainer
+        proverbsMainScreen = ProverbsMainScreen
         setContentView(mainBinding.root)
-        initObservers()
-        initListeners()
+        initView(proverbsViewModel)
     }
 
-    private fun initObservers() {
-        proverbsViewModel.currentProverb.observe(this) { currentProverb ->
-            showProverbOnScreen(currentProverb)
-        }
-    }
-
-    private fun showProverbOnScreen(proverbs:List<Proverbs>){
-        if(proverbs.isNotEmpty()) {
-            val currentProverb = proverbs[(proverbs.indices).random()]
-            buildProverbToShow(currentProverb)
-        }else {
-            Toast.makeText(this, ON_EMPTY_PROVERB_MESSAGE,Toast.LENGTH_LONG).show()
-        }
-    }
-
-    private fun buildProverbToShow(currentProverb:Proverbs){
-        mainBinding.msjTv.text = buildString {
-            append(currentProverb.proverb)
-            append(" src:  ")
-            append(currentProverb.src)
-        }
-    }
-
-    private fun initListeners(){
-        initListenerOnGetProverbsButton()
-    }
-
-    private fun initListenerOnGetProverbsButton(){
-        mainBinding.getProverbsButton.setOnClickListener {
-            proverbsViewModel.update(this)
+    private fun initView(proverbsViewModel: ProverbsViewModel){
+        composeView.setContent {
+            proverbsMainScreen.Show(proverbsViewModel = proverbsViewModel, context = this@MainActivity)
         }
     }
 }

@@ -8,8 +8,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
+import com.example.clean_test.presentation.view.ui_compose.composables.utils.TextStyles
 
 @Composable
 fun GetProverbsElevatedButton(
@@ -17,13 +17,13 @@ fun GetProverbsElevatedButton(
     buttonColor: Color,
     buttonText: String,
 ) {
-    Spacer(modifier = Modifier.height(40.dp))
+    Spacer(modifier = Modifier.height(20.dp))
     ElevatedButton(
         onClick = { onButtonClick() },
         colors = ButtonDefaults.buttonColors(containerColor = buttonColor)
     ) {
         Text(
-            buttonText, color = Color.White, fontFamily = FontFamily.SansSerif
+            buttonText, style = TextStyles.ElevateButtonTextStyle
         )
     }
 }

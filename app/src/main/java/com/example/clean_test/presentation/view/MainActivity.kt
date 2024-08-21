@@ -14,8 +14,8 @@ class MainActivity : AppCompatActivity() {
     private val proverbsViewModel: ProverbsViewModel by viewModels()
     private lateinit var mainBinding: ActivityMainBinding
     private lateinit var composeView: ComposeView
-    private lateinit var proverbsMainScreen: ProverbsMainScreen
-    companion object{
+
+    companion object {
         const val ON_EMPTY_PROVERB_MESSAGE = "No proverbs available, please try again."
     }
 
@@ -23,14 +23,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         mainBinding = ActivityMainBinding.inflate(layoutInflater)
         composeView = mainBinding.mainComposeContainer
-        proverbsMainScreen = ProverbsMainScreen
         setContentView(mainBinding.root)
         initView(proverbsViewModel)
     }
 
-    private fun initView(proverbsViewModel: ProverbsViewModel){
+    private fun initView(proverbsViewModel: ProverbsViewModel) {
         composeView.setContent {
-            proverbsMainScreen.Show(proverbsViewModel = proverbsViewModel, context = this@MainActivity)
+            ProverbsMainScreen(proverbsViewModel = proverbsViewModel, context = this@MainActivity)
         }
     }
 }

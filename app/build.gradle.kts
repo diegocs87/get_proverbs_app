@@ -90,6 +90,8 @@ dependencies {
     implementation ("androidx.compose.ui:ui-tooling-preview")
     // paging
     implementation ("androidx.paging:paging-compose:1.0.0-alpha17")
+    // coil
+    implementation ("io.coil-kt:coil-compose:2.2.2")
 }
 
 kapt {

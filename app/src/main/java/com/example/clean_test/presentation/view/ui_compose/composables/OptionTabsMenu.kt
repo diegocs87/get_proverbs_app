@@ -14,6 +14,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import com.example.clean_test.R
+import com.example.clean_test.presentation.view.ui_compose.screens.SecondScreen
 
 @Composable
 fun OptionsTabsMenu() {

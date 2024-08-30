@@ -6,17 +6,25 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.sp
 import com.example.clean_test.domain.entities.Proverbs
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun MainPager(numberOfPages:Int, proverbsList: List<Proverbs>){
-    // Estado del Pager
+fun MainPager(numberOfPages:Int, proverbsList: List<Proverbs>, selectedTabIndex:Int){
+    var selectedTabId = selectedTabIndex
     val pagerState = rememberPagerState(pageCount = {numberOfPages})
 
-    // Componente HorizontalPager
+    LaunchedEffect(selectedTabIndex){
+        pagerState.animateScrollToPage(selectedTabIndex)
+    }
+
+    LaunchedEffect(pagerState.currentPage){
+        selectedTabId = pagerState.currentPage
+    }
+
     HorizontalPager(
         state = pagerState,
         modifier = Modifier.fillMaxSize(0.9f)

@@ -26,9 +26,7 @@ fun ProverbsMainScreen(proverbsViewModel: ProverbsViewModel, context: Context) {
         verticalArrangement = Arrangement.Top
     ) {
 
-        OptionsTabsMenu()
-        
-        MainPager(numberOfPages = 3, proverbsList = proverbsList)
+        OptionsTabsMenu(proverbsList = proverbsList)
 
         //CardsLazyColumnView(proverbsList = proverbsList)
 

@@ -10,15 +10,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.example.clean_test.presentation.view.ui_compose.composables.CardsLazyColumnView
 import com.example.clean_test.presentation.view.ui_compose.composables.GetProverbsElevatedButton
-import com.example.clean_test.presentation.view.ui_compose.composables.MainPager
 import com.example.clean_test.presentation.view.ui_compose.composables.OptionsTabsMenu
 import com.example.clean_test.presentation.view.ui_compose.theme.CustomViolet
 import com.example.clean_test.presentation.viewmodel.ProverbsViewModel
 
-
 @Composable
-fun ProverbsMainScreen(proverbsViewModel: ProverbsViewModel, context: Context) {
-    val proverbsList by proverbsViewModel.proverbsList
+fun SecondScreen() {
     val columnModifier = Modifier.fillMaxSize()
     Column(
         modifier = columnModifier,
@@ -26,12 +23,8 @@ fun ProverbsMainScreen(proverbsViewModel: ProverbsViewModel, context: Context) {
         verticalArrangement = Arrangement.Top
     ) {
 
-        OptionsTabsMenu(proverbsList = proverbsList)
-
-        //CardsLazyColumnView(proverbsList = proverbsList)
-
         GetProverbsElevatedButton(
-            onButtonClick = { proverbsViewModel.update(context) },
+            onButtonClick = {  },
             buttonColor = CustomViolet,
             buttonText = "Get Proverbs",
         )

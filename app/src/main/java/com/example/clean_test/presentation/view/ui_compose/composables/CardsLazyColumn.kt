@@ -13,8 +13,8 @@ import com.example.clean_test.domain.entities.Proverbs
 
 private val lazyColumnModifier = Modifier
     .fillMaxWidth()
-    .fillMaxSize(0.9f)
-    .padding(top = 20.dp)
+    .fillMaxSize()
+    .padding(top = 10.dp)
 
 const val PICTURE_URL =
     "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/female/25.png"

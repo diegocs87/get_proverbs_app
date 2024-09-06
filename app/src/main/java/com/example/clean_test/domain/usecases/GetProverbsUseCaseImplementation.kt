@@ -1,4 +1,4 @@
-package com.example.clean_test.domain.services
+package com.example.clean_test.domain.usecases
 
 import android.content.Context
 import com.example.clean_test.domain.repository.ProverbsRepositoryHandler
@@ -8,6 +8,6 @@ import javax.inject.Inject
 
 class GetProverbsUseCaseImplementation
     @Inject constructor(@ProverbsRepositoryHandlerImplementationQualifier private val proverbsRepositoryHandler: ProverbsRepositoryHandler)
-    :GetProverbsUseCase {
+    : GetProverbsUseCase {
     override suspend fun get(context: Context):List<Proverbs> = proverbsRepositoryHandler.retrieveFromSource(context)
 }

@@ -2,6 +2,7 @@ package com.example.clean_test.domain.services
 
 import android.content.Context
 import com.example.clean_test.domain.repository.ProverbsRepositoryHandler
+import com.example.clean_test.domain.usecases.GetProverbsUseCaseImplementation
 import io.mockk.coVerify
 import io.mockk.mockk
 import io.mockk.unmockkAll

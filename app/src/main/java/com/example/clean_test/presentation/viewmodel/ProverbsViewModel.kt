@@ -6,7 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.clean_test.domain.entities.Proverbs
-import com.example.clean_test.domain.services.GetProverbsUseCase
+import com.example.clean_test.domain.usecases.GetProverbsUseCase
 import com.example.clean_test.presentation.di.qualifiers.GetProverbsUseCaseImplementationQualifier
 import com.example.clean_test.presentation.di.qualifiers.IODispatcher
 import dagger.hilt.android.lifecycle.HiltViewModel

@@ -1,7 +1,7 @@
 package com.example.clean_test.presentation.di.modules
 
-import com.example.clean_test.domain.services.GetProverbsUseCase
-import com.example.clean_test.domain.services.GetProverbsUseCaseImplementation
+import com.example.clean_test.domain.usecases.GetProverbsUseCase
+import com.example.clean_test.domain.usecases.GetProverbsUseCaseImplementation
 import com.example.clean_test.presentation.di.qualifiers.GetProverbsUseCaseImplementationQualifier
 import dagger.Binds
 import dagger.Module

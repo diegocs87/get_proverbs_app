@@ -25,4 +25,8 @@ object RoomModule {
     @Singleton
     @Provides
     fun roomDbDaoProvider(db:ProverbsDb) = db.proverbsDao()
+
+    @Singleton
+    @Provides
+    fun roomDbFavoritesDaoProvider(db:ProverbsDb) = db.favoritesDao()
 }

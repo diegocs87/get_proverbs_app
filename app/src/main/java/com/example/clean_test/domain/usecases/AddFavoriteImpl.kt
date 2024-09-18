@@ -1,9 +1,10 @@
 package com.example.clean_test.domain.usecases
 
 import com.example.clean_test.domain.entities.Proverbs
+import com.example.clean_test.domain.repository.FavoritesRepositoryHandler
 
-class AddFavoriteImpl: AddFavorite {
-    override fun invoke(proverb: Proverbs) {
-        TODO("Not yet implemented")
+class AddFavoriteImpl(private val favoritesRepositoryHandler: FavoritesRepositoryHandler): AddFavorite {
+    override suspend fun invoke(favorite: Proverbs) {
+        favoritesRepositoryHandler.add(favorite)
     }
 }

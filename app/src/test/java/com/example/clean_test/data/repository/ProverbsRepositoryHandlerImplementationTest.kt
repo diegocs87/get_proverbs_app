@@ -6,7 +6,7 @@ import com.example.clean_test.data.model.ProverbsDataModel
 import com.example.clean_test.data.model.toDomain
 import com.example.clean_test.data.network.NetworkConnectionVerifier
 import com.example.clean_test.data.repository.handler.ProverbsRepositoryHandlerImplementation
-import com.example.clean_test.data.repository.local.LocalProverbsDataSource
+import com.example.clean_test.data.repository.local.LocalDataSource
 import com.example.clean_test.domain.entities.Proverbs
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -23,7 +23,7 @@ import org.junit.runners.JUnit4
 @RunWith(JUnit4::class)
 class ProverbsRepositoryHandlerImplementationTest{
     private lateinit var proverbsRepositoryImplementationSut: ProverbsRepositoryHandlerImplementation
-    private val localSourceMock = mockk<LocalProverbsDataSource>(relaxed = true)
+    private val localSourceMock = mockk<LocalDataSource>(relaxed = true)
     private val remoteSourceMock = mockk<RemoteRepositoryDataSource>(relaxed = true)
     private val networkConnectionVerifier = mockk <NetworkConnectionVerifier>(relaxed = true)
     private val contextMock = mockk<Context>(relaxed = true)

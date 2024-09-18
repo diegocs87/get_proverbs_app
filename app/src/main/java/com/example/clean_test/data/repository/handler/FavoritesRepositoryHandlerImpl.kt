@@ -1,23 +1,20 @@
 package com.example.clean_test.data.repository.handler
 
+import com.example.clean_test.data.di.qualifiers.GetLocalProverbsDataSourceImplementationQualifier
+import com.example.clean_test.data.model.ProverbsDataModel
+import com.example.clean_test.data.repository.local.LocalDataSource
 import com.example.clean_test.domain.repository.FavoritesRepositoryHandler
+import javax.inject.Inject
 
-class FavoritesRepositoryHandlerImpl(private val favoritesSource:): FavoritesRepositoryHandler {
-    override fun add() {
-        TODO("Not yet implemented")
-    }
+class FavoritesRepositoryHandlerImpl @Inject constructor(@GetLocalProverbsDataSourceImplementationQualifier private val favoritesSource: LocalDataSource): FavoritesRepositoryHandler {
 
-    override fun getAll() {
-        TODO("Not yet implemented")
-    }
+    override suspend fun add(favorite:ProverbsDataModel) = favoritesSource.saveSingle(favorite)
 
-    override fun deleteSingle() {
-        TODO("Not yet implemented")
-    }
+    override suspend fun getAll():List<ProverbsDataModel> = favoritesSource.getAll()
 
-    override fun deleteAll() {
-        TODO("Not yet implemented")
-    }
+    override suspend fun deleteSingle(favoriteId: Int) = favoritesSource.deleteSingle(favoriteId)
+
+    override suspend fun deleteAll() = favoritesSource.deleteAll()
 
 
 }

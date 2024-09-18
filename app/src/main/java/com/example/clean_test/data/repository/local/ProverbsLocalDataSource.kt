@@ -17,15 +17,15 @@ import javax.inject.Inject
 class ProverbsLocalDataSource @Inject constructor(@IODispatcher private val coroutineDispatcher: CoroutineDispatcher,
                                                   @GetLocalProverbsReaderImplementationQualifier private val localProverbsReader:Reader,
                                                   @GetLocalProverbsCreatorImplementationQualifier private val localProverbsCreator:Creator,
-                                                  @GetLocalProverbsDeleterImplementationQualifier private val localProverbsDeleter: Deleter): LocalProverbsDataSource {
+                                                  @GetLocalProverbsDeleterImplementationQualifier private val localProverbsDeleter: Deleter): LocalDataSource {
 
-    override suspend fun getAllProverbs(): List<ProverbsDataModel> {
+    override suspend fun getAll(): List<ProverbsDataModel> {
         return withContext(coroutineDispatcher){
            localProverbsReader.getAll().map { proverbs -> proverbs.toDataModel() }
         }
     }
 
-    override suspend fun getSingleProverb(proverbId: Int): ProverbsDataModel? {
+    override suspend fun getSingle(proverbId: Int): ProverbsDataModel? {
         return withContext(coroutineDispatcher){
             localProverbsReader.getSingle(proverbId)?.toDataModel()
         }
@@ -47,11 +47,11 @@ class ProverbsLocalDataSource @Inject constructor(@IODispatcher private val coro
         }
     }
 
-    override suspend fun deleteAllProverbs() {
+    override suspend fun deleteAll() {
         localProverbsDeleter.deleteAllProverbs()
     }
 
-    override suspend fun deleteSingleProverb(proverbId: Int) {
+    override suspend fun deleteSingle(proverbId: Int) {
         localProverbsDeleter.deleteSingleProverb(proverbId)
     }
 }

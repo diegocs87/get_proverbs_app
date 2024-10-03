@@ -35,5 +35,11 @@ fun ProverbsMainScreen(proverbsViewModel: ProverbsViewModel, context: Context) {
             buttonColor = CustomViolet,
             buttonText = "Get Proverbs",
         )
+
+        GetProverbsElevatedButton(
+            onButtonClick = { proverbsViewModel.saveFav(context) },
+            buttonColor = CustomViolet,
+            buttonText = "Save Fav",
+        )
     }
 }

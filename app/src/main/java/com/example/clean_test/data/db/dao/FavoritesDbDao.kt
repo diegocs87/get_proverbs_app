@@ -8,23 +8,22 @@ import com.example.clean_test.data.db.model.ProverbsDbData
 
 @Dao
 interface FavoritesDbDao {
-    interface ProverbsDbDao{
-        @Query("SELECT * FROM favorites_table")
-        fun getAllFavorites():List<ProverbsDbData>
+    @Query("SELECT * FROM favorites_table")
+    fun getAllFavorites(): List<ProverbsDbData>
 
-        @Insert(onConflict = OnConflictStrategy.REPLACE)
-        fun insertAllFavorites(proverbsList: List<ProverbsDbData>)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertAllFavorites(proverbsList: List<ProverbsDbData>)
 
-        @Insert(onConflict = OnConflictStrategy.REPLACE)
-        fun insertSingleFavorite(proverb: ProverbsDbData): Long
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertSingleFavorite(proverb: ProverbsDbData): Long
 
-        @Query("SELECT * FROM favorites_table WHERE id = :proverbId")
-        fun getSingleFavorite(proverbId: Int): ProverbsDbData?
+    @Query("SELECT * FROM favorites_table WHERE id = :proverbId")
+    fun getSingleFavorite(proverbId: Int): ProverbsDbData?
 
-        @Query("DELETE FROM favorites_table WHERE id = :proverbId")
-        fun deleteSingleFavorite(proverbId: Int)
+    @Query("DELETE FROM favorites_table WHERE id = :proverbId")
+    fun deleteSingleFavorite(proverbId: Int)
 
-        @Query("DELETE FROM favorites_table")
-        fun deleteAllFavorites()
-    }
+    @Query("DELETE FROM favorites_table")
+    fun deleteAllFavorites()
+
 }

@@ -3,7 +3,7 @@ package com.example.clean_test.data.repository.local
 import com.example.clean_test.data.db.crud.Creator
 import com.example.clean_test.data.db.crud.Deleter
 import com.example.clean_test.data.db.crud.Reader
-import com.example.clean_test.data.db.model.toDB
+import com.example.clean_test.data.db.model.toProverbsDBData
 import com.example.clean_test.data.model.ProverbsDataModel
 import io.mockk.coVerify
 import io.mockk.mockk
@@ -63,7 +63,7 @@ class ProverbsLocalDataSourceTest {
     fun insertWithPreviousDeletion() {
         runTest { proverbsLocalDataSourceSut.saveAll(proverbListMock, true) }
         coVerify (exactly = 1) { localProverbsDeleter.deleteAllProverbs() }
-        coVerify (exactly = 1){ localProverbsCreator.insertAll(proverbListMock.map { it.toDB() }) }
+        coVerify (exactly = 1){ localProverbsCreator.insertAll(proverbListMock.map { it.toProverbsDBData() }) }
     }
 
     @Test
@@ -71,14 +71,14 @@ class ProverbsLocalDataSourceTest {
     fun insertWithoutPreviousDeletion() {
         runTest { proverbsLocalDataSourceSut.saveAll(proverbListMock, false) }
         coVerify (exactly = 0) { localProverbsDeleter.deleteAllProverbs() }
-        coVerify (exactly = 1){ localProverbsCreator.insertAll(proverbListMock.map { it.toDB() }) }
+        coVerify (exactly = 1){ localProverbsCreator.insertAll(proverbListMock.map { it.toProverbsDBData() }) }
     }
 
     @Test
     @OptIn(ExperimentalCoroutinesApi::class)
     fun saveSingle() {
         runTest { proverbsLocalDataSourceSut.saveSingle(singleProverbMock) }
-        coVerify { localProverbsCreator.insertSingle(singleProverbMock.toDB()) }
+        coVerify { localProverbsCreator.insertSingle(singleProverbMock.toProverbsDBData()) }
     }
 
     @Test

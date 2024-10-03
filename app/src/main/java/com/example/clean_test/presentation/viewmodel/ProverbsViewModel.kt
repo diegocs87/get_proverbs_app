@@ -39,15 +39,6 @@ class ProverbsViewModel
         }
     }
 
-    fun saveFav(context: Context) {
-        viewModelScope.launch {
-            withContext(dispatcher) {
-                val prov = Proverbs("hola", "mundo")
-                addFavoriteUseCase.invoke(prov)
-            }
-        }
-    }
-
     private fun updateCurrentProverbWithRetrievedData() {
         if (proverbs.isNotEmpty()) {
             _proverbsList.value = proverbs

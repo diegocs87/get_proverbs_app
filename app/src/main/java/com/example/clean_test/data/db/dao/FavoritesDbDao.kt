@@ -5,7 +5,6 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.clean_test.data.db.model.FavoriteDbData
-import com.example.clean_test.data.db.model.ProverbsDbData
 
 @Dao
 interface FavoritesDbDao {

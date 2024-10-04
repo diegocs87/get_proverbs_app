@@ -8,9 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.example.clean_test.presentation.view.ui_compose.composables.CardsLazyColumnView
 import com.example.clean_test.presentation.view.ui_compose.composables.GetProverbsElevatedButton
-import com.example.clean_test.presentation.view.ui_compose.composables.MainPager
 import com.example.clean_test.presentation.view.ui_compose.composables.OptionsTabsMenu
 import com.example.clean_test.presentation.view.ui_compose.theme.CustomViolet
 import com.example.clean_test.presentation.viewmodel.ProverbsViewModel

@@ -1,7 +1,6 @@
 package com.example.clean_test.presentation.view.ui_compose.composables
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.pager.HorizontalPager
@@ -21,7 +20,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.sp
 import com.example.clean_test.R
 import com.example.clean_test.domain.entities.Proverbs
-import com.example.clean_test.presentation.view.ui_compose.screens.SecondScreen
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable

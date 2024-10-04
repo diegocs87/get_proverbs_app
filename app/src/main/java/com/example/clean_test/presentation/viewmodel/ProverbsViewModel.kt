@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.clean_test.domain.entities.Proverbs
 import com.example.clean_test.domain.usecases.AddFavorite
-import com.example.clean_test.domain.usecases.AddFavoriteImplementation
 import com.example.clean_test.domain.usecases.GetProverbsUseCase
 import com.example.clean_test.presentation.di.qualifiers.AddFavoriteUseCaseImplementationQualifier
 import com.example.clean_test.presentation.di.qualifiers.GetProverbsUseCaseImplementationQualifier

@@ -22,6 +22,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberAsyncImagePainter
 import com.example.clean_test.R
 import com.example.clean_test.domain.entities.Proverbs
@@ -46,9 +47,7 @@ private val iconModifier = Modifier
 
 @Composable
 fun setElevatedCardWith(
-    currentProverb: Proverbs,
-    pictureURL: String,
-    proverbsViewModel: ProverbsViewModel
+    currentProverb: Proverbs, pictureURL: String
 ) {
     ElevatedCard(modifier = elevatedCarModifier) {
         Row {
@@ -59,7 +58,7 @@ fun setElevatedCardWith(
                 modifier = rowTextModifier.align(Alignment.CenterVertically)
             )
 
-            setFavoritesLogo(iconModifier.align(Alignment.CenterVertically), proverbsViewModel)
+            setFavoritesLogo(iconModifier.align(Alignment.CenterVertically))
         }
     }
 }
@@ -75,10 +74,13 @@ fun setPictureOnElevatedCard(pictureURL: String) {
 }
 
 @Composable
-fun setFavoritesLogo(modifier: Modifier, proverbsViewModel: ProverbsViewModel) {
+fun setFavoritesLogo(modifier: Modifier) {
+    val proverbsViewModel: ProverbsViewModel = hiltViewModel()
     var isToggled by remember { mutableStateOf(false) }
-    IconButton(onClick = { isToggled = !isToggled
-                         proverbsViewModel.addFavorite()}, modifier = modifier) {
+    IconButton(onClick = {
+        isToggled = !isToggled
+        proverbsViewModel.addFavorite()
+    }, modifier = modifier) {
         val icon = getPainterIf(isToggled)
         Image(
             painter = icon,

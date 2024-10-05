@@ -63,7 +63,7 @@ fun OptionsTabsMenu(proverbsList: List<Proverbs>, proverbsViewModel: ProverbsVie
     )
     { page ->
         if(page == 0 ){
-            CardsLazyColumnView(proverbsList = proverbsList, proverbsViewModel)
+            CardsLazyColumnView(proverbsList = proverbsList)
         }
         Text(
             text = "Page: $page",

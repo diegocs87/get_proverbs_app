@@ -20,10 +20,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.sp
 import com.example.clean_test.R
 import com.example.clean_test.domain.entities.Proverbs
+import com.example.clean_test.presentation.viewmodel.ProverbsViewModel
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun OptionsTabsMenu(proverbsList: List<Proverbs>) {
+fun OptionsTabsMenu(proverbsList: List<Proverbs>, proverbsViewModel: ProverbsViewModel) {
     val tabsTittleList = listOf("Main", "Favorites", "Next")
     var selectedTabIndex by remember { mutableStateOf(0) }
 
@@ -62,7 +63,7 @@ fun OptionsTabsMenu(proverbsList: List<Proverbs>) {
     )
     { page ->
         if(page == 0 ){
-            CardsLazyColumnView(proverbsList = proverbsList)
+            CardsLazyColumnView(proverbsList = proverbsList, proverbsViewModel)
         }
         Text(
             text = "Page: $page",

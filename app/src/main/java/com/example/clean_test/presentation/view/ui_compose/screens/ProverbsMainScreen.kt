@@ -24,9 +24,7 @@ fun ProverbsMainScreen(proverbsViewModel: ProverbsViewModel, context: Context) {
         verticalArrangement = Arrangement.Top
     ) {
 
-        OptionsTabsMenu(proverbsList = proverbsList)
-
-        //CardsLazyColumnView(proverbsList = proverbsList)
+        OptionsTabsMenu(proverbsList = proverbsList, proverbsViewModel)
 
         GetProverbsElevatedButton(
             onButtonClick = { proverbsViewModel.update(context) },

@@ -13,6 +13,6 @@ object TextStyles {
         color = Color.Black,
         fontFamily = FontFamily.SansSerif,
         fontWeight = FontWeight.Bold,
-        fontSize = 35.sp
+        fontSize = 20.sp
     )
 }

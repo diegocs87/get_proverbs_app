@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.clean_test.domain.entities.Proverbs
+import com.example.clean_test.presentation.viewmodel.ProverbsViewModel
 
 private val lazyColumnModifier = Modifier
     .fillMaxWidth()
@@ -21,12 +22,12 @@ const val PICTURE_URL =
 
 
 @Composable
-fun CardsLazyColumnView(proverbsList: List<Proverbs>) {
+fun CardsLazyColumnView(proverbsList: List<Proverbs>, proverbsViewModel: ProverbsViewModel) {
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(20.dp), modifier = lazyColumnModifier
     ) {
         items(proverbsList) { proverb ->
-            setElevatedCardWith(proverb, PICTURE_URL)
+            setElevatedCardWith(proverb, PICTURE_URL, proverbsViewModel)
         }
     }
 }

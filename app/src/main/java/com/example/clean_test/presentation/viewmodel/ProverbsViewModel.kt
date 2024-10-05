@@ -38,6 +38,14 @@ class ProverbsViewModel
         }
     }
 
+    fun addFavorite() {
+        viewModelScope.launch {
+            withContext(dispatcher) {
+                addFavoriteUseCase.invoke(Proverbs("hola", "mundo"))
+            }
+        }
+    }
+
     private fun updateCurrentProverbWithRetrievedData() {
         if (proverbs.isNotEmpty()) {
             _proverbsList.value = proverbs

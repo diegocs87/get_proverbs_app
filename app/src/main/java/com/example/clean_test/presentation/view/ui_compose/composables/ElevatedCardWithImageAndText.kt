@@ -58,7 +58,7 @@ fun setElevatedCardWith(
                 modifier = rowTextModifier.align(Alignment.CenterVertically)
             )
 
-            setFavoritesLogo(iconModifier.align(Alignment.CenterVertically))
+            setFavoritesLogo(iconModifier.align(Alignment.CenterVertically), currentProverb)
         }
     }
 }
@@ -74,12 +74,12 @@ fun setPictureOnElevatedCard(pictureURL: String) {
 }
 
 @Composable
-fun setFavoritesLogo(modifier: Modifier) {
+fun setFavoritesLogo(modifier: Modifier, currentProverb: Proverbs) {
     val proverbsViewModel: ProverbsViewModel = hiltViewModel()
     var isToggled by remember { mutableStateOf(false) }
     IconButton(onClick = {
         isToggled = !isToggled
-        proverbsViewModel.addFavorite()
+        proverbsViewModel.addFavorite(currentProverb)
     }, modifier = modifier) {
         val icon = getPainterIf(isToggled)
         Image(

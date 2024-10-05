@@ -38,10 +38,10 @@ class ProverbsViewModel
         }
     }
 
-    fun addFavorite() {
+    fun addFavorite(favorite:Proverbs) {
         viewModelScope.launch {
             withContext(dispatcher) {
-                addFavoriteUseCase.invoke(Proverbs("hola", "mundo"))
+                addFavoriteUseCase.invoke(favorite)
             }
         }
     }

@@ -9,7 +9,7 @@ import com.example.clean_test.data.network.NetworkConnectionVerifier
 import com.example.clean_test.data.repository.handler.ProverbsRepositoryHandlerImplementation
 import com.example.clean_test.data.repository.local.ProverbsLocalDataSource
 import com.example.clean_test.data.repository.remote.ProverbsRemoteDataSource
-import com.example.clean_test.domain.services.GetProverbsUseCaseImplementation
+import com.example.clean_test.domain.usecases.GetProverbsUseCaseImplementation
 import com.example.clean_test.presentation.viewmodel.ProverbsViewModel
 import io.mockk.coEvery
 import io.mockk.mockk

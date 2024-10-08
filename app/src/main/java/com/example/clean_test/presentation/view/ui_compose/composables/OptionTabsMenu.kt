@@ -24,7 +24,7 @@ import com.example.clean_test.presentation.viewmodel.ProverbsViewModel
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun OptionsTabsMenu(proverbsList: List<Proverbs>, proverbsViewModel: ProverbsViewModel) {
+fun OptionsTabsMenu(proverbsList: List<Proverbs>) {
     val tabsTittleList = listOf("Main", "Favorites", "Next")
     var selectedTabIndex by remember { mutableStateOf(0) }
 

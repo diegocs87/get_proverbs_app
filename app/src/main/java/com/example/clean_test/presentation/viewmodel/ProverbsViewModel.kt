@@ -8,9 +8,11 @@ import androidx.lifecycle.viewModelScope
 import com.example.clean_test.domain.entities.Proverbs
 import com.example.clean_test.domain.usecases.AddFavorite
 import com.example.clean_test.domain.usecases.GetProverbsUseCase
+import com.example.clean_test.domain.usecases.RemoveFavorite
 import com.example.clean_test.presentation.di.qualifiers.AddFavoriteUseCaseImplementationQualifier
 import com.example.clean_test.presentation.di.qualifiers.GetProverbsUseCaseImplementationQualifier
 import com.example.clean_test.presentation.di.qualifiers.IODispatcher
+import com.example.clean_test.presentation.di.qualifiers.RemoveFavoriteUseCaseImplementationQualifier
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
@@ -22,6 +24,7 @@ class ProverbsViewModel
 @Inject constructor(
     @GetProverbsUseCaseImplementationQualifier private val getProverbsUseCase: GetProverbsUseCase,
     @AddFavoriteUseCaseImplementationQualifier private val addFavoriteUseCase: AddFavorite,
+    @RemoveFavoriteUseCaseImplementationQualifier private val removeFavoriteUseCase: RemoveFavorite,
     @IODispatcher private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
     private var randomProverb = emptyList<Proverbs>()
@@ -35,6 +38,14 @@ class ProverbsViewModel
                 proverbs = getProverbsUseCase.get(context)
             }
             updateCurrentProverbWithRetrievedData()
+        }
+    }
+
+    fun removeFavorite(favorite: Proverbs){
+        viewModelScope.launch {
+            withContext(dispatcher) {
+                removeFavoriteUseCase.invoke(favorite)
+            }
         }
     }
 

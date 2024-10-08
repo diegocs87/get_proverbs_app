@@ -8,5 +8,5 @@ interface LocalDataSource {
     suspend fun saveAll(proverbsList:List<ProverbsDataModel>,deleteBefore:Boolean)
     suspend fun saveSingle(proverb:ProverbsDataModel)
     suspend fun deleteAll()
-    suspend fun deleteSingle(proverbId: Int)
+    suspend fun deleteSingle(proverb: ProverbsDataModel)
 }

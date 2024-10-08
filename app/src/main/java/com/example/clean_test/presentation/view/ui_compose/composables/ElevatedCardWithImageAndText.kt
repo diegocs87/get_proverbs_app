@@ -79,7 +79,7 @@ fun setFavoritesLogo(modifier: Modifier, currentProverb: Proverbs) {
     var isToggled by remember { mutableStateOf(false) }
     IconButton(onClick = {
         isToggled = !isToggled
-        proverbsViewModel.addFavorite(currentProverb)
+        setFavoriteState(isToggled, proverbsViewModel, currentProverb)
     }, modifier = modifier) {
         val icon = getPainterIf(isToggled)
         Image(
@@ -99,4 +99,13 @@ private fun getPainterIf(isToggled: Boolean): Painter {
         painterResource(id = R.drawable.favorite_logo_no_clicked)
     }
     return icon
+}
+
+
+private fun setFavoriteState(
+    isToggled: Boolean, proverbsViewModel: ProverbsViewModel, currentProverb: Proverbs
+) = if (isToggled) {
+    proverbsViewModel.addFavorite(currentProverb)
+} else {
+    proverbsViewModel.removeFavorite(currentProverb)
 }

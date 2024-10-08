@@ -1,11 +1,13 @@
 package com.example.clean_test.domain.usecases
 
+import com.example.clean_test.data.db.model.toData
 import com.example.clean_test.domain.entities.Proverbs
-import com.example.clean_test.domain.repository.ProverbsRepositoryHandler
-import com.example.clean_test.presentation.di.qualifiers.ProverbsRepositoryHandlerImplementationQualifier
+import com.example.clean_test.domain.repository.FavoritesRepositoryHandler
+import com.example.clean_test.presentation.di.qualifiers.FavoritesRepositoryHandlerImplementationQualifier
+import javax.inject.Inject
 
-class RemoveFavoriteImplementation(@ProverbsRepositoryHandlerImplementationQualifier private val proverbsRepositoryHandler: ProverbsRepositoryHandler): RemoveFavorite {
-    override fun invoke(proverb: Proverbs) {
-        TODO("Not yet implemented")
+class RemoveFavoriteImplementation @Inject constructor (@FavoritesRepositoryHandlerImplementationQualifier private val favoritesRepositoryHandler: FavoritesRepositoryHandler): RemoveFavorite {
+    override suspend fun invoke(proverb: Proverbs) {
+        favoritesRepositoryHandler.deleteSingle(proverb.toData())
     }
 }

@@ -24,7 +24,7 @@ fun ProverbsMainScreen(proverbsViewModel: ProverbsViewModel, context: Context) {
         verticalArrangement = Arrangement.Top
     ) {
 
-        OptionsTabsMenu(proverbsList = proverbsList, proverbsViewModel)
+        OptionsTabsMenu(proverbsList = proverbsList)
 
         GetProverbsElevatedButton(
             onButtonClick = { proverbsViewModel.update(context) },

@@ -48,7 +48,7 @@ class ProverbsLocalDataSource @Inject constructor(@IODispatcher private val coro
         localProverbsDeleter.deleteAllProverbs()
     }
 
-    override suspend fun deleteSingle(proverbId: Int) {
-        localProverbsDeleter.deleteSingleProverb(proverbId)
+    override suspend fun deleteSingle(proverb: ProverbsDataModel) {
+        localProverbsDeleter.deleteSingleProverb(proverb)
     }
 }

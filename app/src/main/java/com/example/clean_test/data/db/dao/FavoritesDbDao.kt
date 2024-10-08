@@ -20,8 +20,8 @@ interface FavoritesDbDao {
     @Query("SELECT * FROM favorites_table WHERE id = :proverbId")
     fun getSingleFavorite(proverbId: Int): FavoriteDbData?
 
-    @Query("DELETE FROM favorites_table WHERE id = :proverbId")
-    fun deleteSingleFavorite(proverbId: Int)
+    @Query("DELETE FROM favorites_table WHERE proverb = :proverb")
+    fun deleteSingleFavorite(proverb: String)
 
     @Query("DELETE FROM favorites_table")
     fun deleteAllFavorites()

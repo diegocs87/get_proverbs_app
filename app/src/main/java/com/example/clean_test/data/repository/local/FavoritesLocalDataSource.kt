@@ -27,6 +27,6 @@ class FavoritesLocalDataSource @Inject constructor(
 
     override suspend fun deleteAll() = localFavoritesDeleter.deleteAllProverbs()
 
-    override suspend fun deleteSingle(proverbId: Int) =
-        localFavoritesDeleter.deleteSingleProverb(proverbId)
+    override suspend fun deleteSingle(proverb: ProverbsDataModel) =
+        localFavoritesDeleter.deleteSingleProverb(proverb)
 }

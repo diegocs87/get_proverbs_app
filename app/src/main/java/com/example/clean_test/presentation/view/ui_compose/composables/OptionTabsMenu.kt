@@ -24,9 +24,10 @@ import com.example.clean_test.presentation.viewmodel.ProverbsViewModel
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun OptionsTabsMenu(proverbsList: List<Proverbs>) {
+fun OptionsTabsMenu(proverbsList: List<Proverbs>, proverbsViewModel: ProverbsViewModel) {
     val tabsTittleList = listOf("Main", "Favorites", "Next")
     var selectedTabIndex by remember { mutableStateOf(0) }
+    val favoritesList by proverbsViewModel.favoritesList
 
     TabRow(
         selectedTabIndex = selectedTabIndex, modifier = Modifier
@@ -34,8 +35,10 @@ fun OptionsTabsMenu(proverbsList: List<Proverbs>) {
             .fillMaxSize(0.08f)
     ) {
         tabsTittleList.forEachIndexed { tabIndex, tittle ->
-            Tab(selected = isSelected(tabIndex, selectedTabIndex),
-                onClick = { selectedTabIndex = tabIndex }) {
+            Tab(selected = isSelected(tabIndex, selectedTabIndex), onClick = {
+                selectedTabIndex = tabIndex
+                getFavoritesList(selectedTabIndex, proverbsViewModel)
+            }) {
                 Icon(
                     painter = painterResource(getResourceOfTab(tabIndex)),
                     contentDescription = tittle
@@ -45,33 +48,47 @@ fun OptionsTabsMenu(proverbsList: List<Proverbs>) {
         }
     }
 
+
     val pagerState = rememberPagerState(pageCount = { tabsTittleList.size })
 
     LaunchedEffect(selectedTabIndex) {
         pagerState.animateScrollToPage(selectedTabIndex)
     }
 
-    LaunchedEffect(pagerState.currentPage,pagerState.isScrollInProgress) {
-        if(!pagerState.isScrollInProgress) {
+    LaunchedEffect(pagerState.currentPage, pagerState.isScrollInProgress) {
+        if (!pagerState.isScrollInProgress) {
             selectedTabIndex = pagerState.currentPage
         }
     }
 
     HorizontalPager(
-        state = pagerState,
-        modifier = Modifier.fillMaxSize(0.9f)
-    )
-    { page ->
-        if(page == 0 ){
-            CardsLazyColumnView(proverbsList = proverbsList)
-        }
+        state = pagerState, modifier = Modifier.fillMaxSize(0.9f)
+    ) { page ->
+        setScreenData(page, proverbsList, favoritesList)
         Text(
-            text = "Page: $page",
-            fontSize = 32.sp,
-            modifier = Modifier.fillMaxSize()
+            text = "Page: $page", fontSize = 32.sp, modifier = Modifier.fillMaxSize()
         )
     }
 
+}
+
+@Composable
+private fun setScreenData(
+    page: Int, proverbsList: List<Proverbs>, favoritesList: List<Proverbs>
+) {
+    when (page) {
+        0 -> CardsLazyColumnView(proverbsList = proverbsList)
+        1 -> CardsLazyColumnView(proverbsList = favoritesList)
+        else -> {}
+    }
+}
+
+private fun getFavoritesList(
+    selectedTabIndex: Int, proverbsViewModel: ProverbsViewModel
+) {
+    if (selectedTabIndex == 1) {
+        proverbsViewModel.getFavorites()
+    }
 }
 
 private fun isSelected(tabIndex: Int, selectedTabIndex: Int) = tabIndex == selectedTabIndex

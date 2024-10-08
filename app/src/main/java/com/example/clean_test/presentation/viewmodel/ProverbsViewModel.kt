@@ -7,9 +7,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.clean_test.domain.entities.Proverbs
 import com.example.clean_test.domain.usecases.AddFavorite
+import com.example.clean_test.domain.usecases.GetFavorites
 import com.example.clean_test.domain.usecases.GetProverbsUseCase
 import com.example.clean_test.domain.usecases.RemoveFavorite
 import com.example.clean_test.presentation.di.qualifiers.AddFavoriteUseCaseImplementationQualifier
+import com.example.clean_test.presentation.di.qualifiers.GetFavoritesUseCaseImplementationQualifier
 import com.example.clean_test.presentation.di.qualifiers.GetProverbsUseCaseImplementationQualifier
 import com.example.clean_test.presentation.di.qualifiers.IODispatcher
 import com.example.clean_test.presentation.di.qualifiers.RemoveFavoriteUseCaseImplementationQualifier
@@ -23,14 +25,18 @@ import javax.inject.Inject
 class ProverbsViewModel
 @Inject constructor(
     @GetProverbsUseCaseImplementationQualifier private val getProverbsUseCase: GetProverbsUseCase,
+    @GetFavoritesUseCaseImplementationQualifier private val getFavoritesUseCase: GetFavorites,
     @AddFavoriteUseCaseImplementationQualifier private val addFavoriteUseCase: AddFavorite,
     @RemoveFavoriteUseCaseImplementationQualifier private val removeFavoriteUseCase: RemoveFavorite,
     @IODispatcher private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
     private var randomProverb = emptyList<Proverbs>()
     private val _proverbsList = mutableStateOf(randomProverb)
+    private val _favoritesList = mutableStateOf(randomProverb)
     val proverbsList: State<List<Proverbs>> get() = _proverbsList
+    val favoritesList: State<List<Proverbs>> get() = _favoritesList
     private lateinit var proverbs: List<Proverbs>
+    private lateinit var favorites: List<Proverbs>
 
     fun update(context: Context) {
         viewModelScope.launch {
@@ -38,6 +44,15 @@ class ProverbsViewModel
                 proverbs = getProverbsUseCase.get(context)
             }
             updateCurrentProverbWithRetrievedData()
+        }
+    }
+
+    fun getFavorites(){
+        viewModelScope.launch {
+            withContext(dispatcher) {
+                favorites = getFavoritesUseCase.invoke()
+            }
+            updateFavoritesListWithRetrievedData()
         }
     }
 
@@ -61,5 +76,9 @@ class ProverbsViewModel
         if (proverbs.isNotEmpty()) {
             _proverbsList.value = proverbs
         }
+    }
+
+    private fun updateFavoritesListWithRetrievedData() {
+        _favoritesList.value = favorites
     }
 }

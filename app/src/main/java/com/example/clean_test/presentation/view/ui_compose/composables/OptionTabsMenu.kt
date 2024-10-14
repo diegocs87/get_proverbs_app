@@ -77,9 +77,8 @@ private fun setScreenData(
     page: Int, proverbsList: List<Proverbs>, favoritesList: List<Proverbs>
 ) {
     when (page) {
-        0 -> CardsLazyColumnView(proverbsList = proverbsList)
-        1 -> CardsLazyColumnView(proverbsList = favoritesList)
-        else -> {}
+        0 -> CardsLazyColumnView(proverbsList = proverbsList, page)
+        1 -> CardsLazyColumnView(proverbsList = favoritesList, page)
     }
 }
 

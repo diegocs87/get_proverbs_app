@@ -11,8 +11,9 @@ import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -24,10 +25,11 @@ import com.example.clean_test.presentation.viewmodel.ProverbsViewModel
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun OptionsTabsMenu(proverbsList: List<Proverbs>, proverbsViewModel: ProverbsViewModel) {
+fun OptionsTabsMenu(proverbsViewModel: ProverbsViewModel) {
     val tabsTittleList = listOf("Main", "Favorites", "Next")
-    var selectedTabIndex by remember { mutableStateOf(0) }
-    val favoritesList by proverbsViewModel.favoritesList
+    var selectedTabIndex by remember { mutableIntStateOf(0) }
+    val proverbsList by proverbsViewModel.proverbsList.collectAsState()
+    val favoritesList by proverbsViewModel.favoritesList.collectAsState()
 
     TabRow(
         selectedTabIndex = selectedTabIndex, modifier = Modifier
@@ -64,7 +66,7 @@ fun OptionsTabsMenu(proverbsList: List<Proverbs>, proverbsViewModel: ProverbsVie
     HorizontalPager(
         state = pagerState, modifier = Modifier.fillMaxSize(0.9f)
     ) { page ->
-        setScreenData(page, proverbsList, favoritesList)
+        SetScreenData(page, proverbsList, favoritesList)
         Text(
             text = "Page: $page", fontSize = 32.sp, modifier = Modifier.fillMaxSize()
         )
@@ -73,12 +75,12 @@ fun OptionsTabsMenu(proverbsList: List<Proverbs>, proverbsViewModel: ProverbsVie
 }
 
 @Composable
-private fun setScreenData(
+private fun SetScreenData(
     page: Int, proverbsList: List<Proverbs>, favoritesList: List<Proverbs>
 ) {
     when (page) {
-        0 -> CardsLazyColumnView(proverbsList = proverbsList, page)
-        1 -> CardsLazyColumnView(proverbsList = favoritesList, page)
+        0 -> ProverbsCardLazyColumnView(proverbsList = proverbsList, page)
+        1 -> FavoritesCardLazyColumnView(favoritesList = favoritesList, page)
     }
 }
 

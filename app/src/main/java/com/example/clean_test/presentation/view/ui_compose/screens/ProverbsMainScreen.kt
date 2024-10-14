@@ -16,7 +16,6 @@ import com.example.clean_test.presentation.viewmodel.ProverbsViewModel
 
 @Composable
 fun ProverbsMainScreen(proverbsViewModel: ProverbsViewModel, context: Context) {
-    val proverbsList by proverbsViewModel.proverbsList
     val columnModifier = Modifier.fillMaxSize()
     Column(
         modifier = columnModifier,
@@ -24,7 +23,7 @@ fun ProverbsMainScreen(proverbsViewModel: ProverbsViewModel, context: Context) {
         verticalArrangement = Arrangement.Top
     ) {
 
-        OptionsTabsMenu(proverbsList = proverbsList, proverbsViewModel)
+        OptionsTabsMenu(proverbsViewModel)
 
         GetProverbsElevatedButton(
             onButtonClick = { proverbsViewModel.update(context) },

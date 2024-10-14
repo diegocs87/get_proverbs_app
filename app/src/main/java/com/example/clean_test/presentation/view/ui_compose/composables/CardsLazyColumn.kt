@@ -21,12 +21,23 @@ const val PICTURE_URL =
 
 
 @Composable
-fun CardsLazyColumnView(proverbsList: List<Proverbs>, page: Int) {
+fun ProverbsCardLazyColumnView(proverbsList: List<Proverbs>, page: Int) {
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(20.dp), modifier = lazyColumnModifier
     ) {
         items(proverbsList) { proverb ->
             SetElevatedCardWith(proverb, PICTURE_URL, page)
+        }
+    }
+}
+
+@Composable
+fun FavoritesCardLazyColumnView(favoritesList: List<Proverbs>, page: Int) {
+    LazyColumn(
+        verticalArrangement = Arrangement.spacedBy(20.dp), modifier = lazyColumnModifier
+    ) {
+        items(favoritesList) { favorites ->
+            SetElevatedCardWith(favorites, PICTURE_URL, page)
         }
     }
 }

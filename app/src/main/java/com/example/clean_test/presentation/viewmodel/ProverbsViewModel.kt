@@ -1,8 +1,6 @@
 package com.example.clean_test.presentation.viewmodel
 
 import android.content.Context
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.clean_test.domain.entities.Proverbs
@@ -17,6 +15,8 @@ import com.example.clean_test.presentation.di.qualifiers.IODispatcher
 import com.example.clean_test.presentation.di.qualifiers.RemoveFavoriteUseCaseImplementationQualifier
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -31,10 +31,10 @@ class ProverbsViewModel
     @IODispatcher private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
     private var randomProverb = emptyList<Proverbs>()
-    private val _proverbsList = mutableStateOf(randomProverb)
-    private val _favoritesList = mutableStateOf(randomProverb)
-    val proverbsList: State<List<Proverbs>> get() = _proverbsList
-    val favoritesList: State<List<Proverbs>> get() = _favoritesList
+    private val _proverbsList = MutableStateFlow(randomProverb)
+    private val _favoritesList = MutableStateFlow(randomProverb)
+    val proverbsList: StateFlow<List<Proverbs>> get() = _proverbsList
+    val favoritesList: StateFlow<List<Proverbs>> get() = _favoritesList
     private lateinit var proverbs: List<Proverbs>
     private lateinit var favorites: List<Proverbs>
 
@@ -60,7 +60,9 @@ class ProverbsViewModel
         viewModelScope.launch {
             withContext(dispatcher) {
                 removeFavoriteUseCase.invoke(favorite)
+                favorites = getFavoritesUseCase.invoke()
             }
+            updateFavoritesListWithRetrievedData()
         }
     }
 

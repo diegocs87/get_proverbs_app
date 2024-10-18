@@ -1,6 +1,7 @@
 package com.example.clean_test.presentation.viewmodel
 
 import android.content.Context
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.clean_test.domain.entities.Proverbs
@@ -37,6 +38,21 @@ class ProverbsViewModel
     val favoritesList: StateFlow<List<Proverbs>> get() = _favoritesList
     private lateinit var proverbs: List<Proverbs>
     private lateinit var favorites: List<Proverbs>
+
+    private val _favoritesState = mutableStateOf<Map<Proverbs, Boolean>>(emptyMap())
+
+    fun toggleFavorite(proverbId: Proverbs) {
+        val currentState = _favoritesState.value
+        val newState = currentState.toMutableMap().apply {
+            this[proverbId] = !(this[proverbId] ?: false)
+        }
+        _favoritesState.value = newState
+    }
+
+    // Función para obtener el estado de favorito de un proverbio
+    fun isFavorite(currentProverb: Proverbs): Boolean {
+        return _favoritesState.value[currentProverb] ?: false
+    }
 
     fun update(context: Context) {
         viewModelScope.launch {

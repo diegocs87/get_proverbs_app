@@ -18,7 +18,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.sp
 import com.example.clean_test.R
 import com.example.clean_test.domain.entities.Proverbs
 import com.example.clean_test.presentation.viewmodel.ProverbsViewModel
@@ -67,9 +66,6 @@ fun OptionsTabsMenu(proverbsViewModel: ProverbsViewModel) {
         state = pagerState, modifier = Modifier.fillMaxSize(0.9f)
     ) { page ->
         SetScreenData(page, proverbsList, favoritesList)
-        Text(
-            text = "Page: $page", fontSize = 32.sp, modifier = Modifier.fillMaxSize()
-        )
     }
 
 }

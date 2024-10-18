@@ -12,10 +12,9 @@ import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
@@ -86,9 +85,9 @@ fun SetPictureOnElevatedCard(pictureURL: String) {
 @Composable
 fun SetFavoritesLogo(modifier: Modifier, currentProverb: Proverbs) {
     val proverbsViewModel: ProverbsViewModel = hiltViewModel()
-    var isToggled by remember { mutableStateOf(false) }
+    val isToggled by remember { derivedStateOf { proverbsViewModel.isFavorite(currentProverb) } }
     IconButton(onClick = {
-        isToggled = !isToggled
+        proverbsViewModel.toggleFavorite(currentProverb)
         setFavoriteState(isToggled, proverbsViewModel, currentProverb)
     }, modifier = modifier) {
         val icon = getPainterIf(isToggled)

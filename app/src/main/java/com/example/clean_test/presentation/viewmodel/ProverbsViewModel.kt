@@ -49,7 +49,6 @@ class ProverbsViewModel
         _favoritesState.value = newState
     }
 
-    // Función para obtener el estado de favorito de un proverbio
     fun isFavorite(currentProverb: Proverbs): Boolean {
         return _favoritesState.value[currentProverb] ?: false
     }

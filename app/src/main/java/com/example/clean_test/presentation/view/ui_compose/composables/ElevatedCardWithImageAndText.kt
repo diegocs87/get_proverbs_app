@@ -12,10 +12,9 @@ import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
@@ -29,6 +28,8 @@ import com.example.clean_test.domain.entities.Proverbs
 import com.example.clean_test.presentation.view.ui_compose.composables.utils.TextStyles
 import com.example.clean_test.presentation.viewmodel.ProverbsViewModel
 
+
+const val PROVERBS_PICTURE_DESCRIPTION = "proverbs description"
 
 private val elevatedCarModifier = Modifier
     .padding(start = 10.dp, end = 10.dp)
@@ -46,45 +47,72 @@ private val iconModifier = Modifier
     .padding(start = 5.dp, end = 5.dp, bottom = 2.dp, top = 2.dp)
 
 @Composable
-fun setElevatedCardWith(
-    currentProverb: Proverbs, pictureURL: String
+fun SetElevatedCardWith(
+    currentProverb: Proverbs, pictureURL: String, page: Int
 ) {
     ElevatedCard(modifier = elevatedCarModifier) {
         Row {
-            setPictureOnElevatedCard(pictureURL)
+            SetPictureOnElevatedCard(pictureURL)
             Text(
                 currentProverb.toString(),
                 style = TextStyles.ElevatedCardsTextStyle,
                 modifier = rowTextModifier.align(Alignment.CenterVertically)
             )
 
-            setFavoritesLogo(iconModifier.align(Alignment.CenterVertically), currentProverb)
+            when (page) {
+                0 -> SetFavoritesLogo(
+                    iconModifier.align(Alignment.CenterVertically), currentProverb
+                )
+
+                1 -> SetRemoveLogo(
+                    iconModifier.align(Alignment.CenterVertically), currentProverb
+                )
+            }
         }
     }
 }
 
 @Composable
-fun setPictureOnElevatedCard(pictureURL: String) {
+fun SetPictureOnElevatedCard(pictureURL: String) {
     Image(
         painter = rememberAsyncImagePainter(model = pictureURL),
-        contentDescription = "proverbs description",
+        contentDescription = PROVERBS_PICTURE_DESCRIPTION,
         modifier = imageModifier,
         contentScale = ContentScale.Crop
     )
 }
 
 @Composable
-fun setFavoritesLogo(modifier: Modifier, currentProverb: Proverbs) {
+fun SetFavoritesLogo(modifier: Modifier, currentProverb: Proverbs) {
     val proverbsViewModel: ProverbsViewModel = hiltViewModel()
-    var isToggled by remember { mutableStateOf(false) }
+    val isToggled by remember { derivedStateOf { proverbsViewModel.isFavorite(currentProverb) } }
     IconButton(onClick = {
-        isToggled = !isToggled
+        proverbsViewModel.toggleFavorite(currentProverb)
         setFavoriteState(isToggled, proverbsViewModel, currentProverb)
     }, modifier = modifier) {
         val icon = getPainterIf(isToggled)
         Image(
             painter = icon,
-            contentDescription = "proverbs description",
+            contentDescription = PROVERBS_PICTURE_DESCRIPTION,
+            modifier = imageModifier,
+            contentScale = ContentScale.Crop
+        )
+    }
+}
+
+@Composable
+fun SetRemoveLogo(modifier: Modifier, currentProverb: Proverbs) {
+    val proverbsViewModel: ProverbsViewModel = hiltViewModel()
+    IconButton(
+        onClick = {
+            proverbsViewModel.toggleFavorite(currentProverb)
+            removeFavorite(proverbsViewModel, currentProverb)
+        }, modifier = modifier
+    ) {
+        val icon = painterResource(R.drawable.trash_icon)
+        Image(
+            painter = icon,
+            contentDescription = PROVERBS_PICTURE_DESCRIPTION,
             modifier = imageModifier,
             contentScale = ContentScale.Crop
         )
@@ -99,6 +127,10 @@ private fun getPainterIf(isToggled: Boolean): Painter {
         painterResource(id = R.drawable.favorite_logo_no_clicked)
     }
     return icon
+}
+
+private fun removeFavorite(proverbsViewModel: ProverbsViewModel, currentProverb: Proverbs) {
+    proverbsViewModel.removeFavorite(currentProverb)
 }
 
 

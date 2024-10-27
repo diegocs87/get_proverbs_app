@@ -11,22 +11,24 @@ import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.sp
 import com.example.clean_test.R
 import com.example.clean_test.domain.entities.Proverbs
 import com.example.clean_test.presentation.viewmodel.ProverbsViewModel
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun OptionsTabsMenu(proverbsList: List<Proverbs>) {
+fun OptionsTabsMenu(proverbsViewModel: ProverbsViewModel) {
     val tabsTittleList = listOf("Main", "Favorites", "Next")
-    var selectedTabIndex by remember { mutableStateOf(0) }
+    var selectedTabIndex by remember { mutableIntStateOf(0) }
+    val proverbsList by proverbsViewModel.proverbsList.collectAsState()
+    val favoritesList by proverbsViewModel.favoritesList.collectAsState()
 
     TabRow(
         selectedTabIndex = selectedTabIndex, modifier = Modifier
@@ -34,8 +36,10 @@ fun OptionsTabsMenu(proverbsList: List<Proverbs>) {
             .fillMaxSize(0.08f)
     ) {
         tabsTittleList.forEachIndexed { tabIndex, tittle ->
-            Tab(selected = isSelected(tabIndex, selectedTabIndex),
-                onClick = { selectedTabIndex = tabIndex }) {
+            Tab(selected = isSelected(tabIndex, selectedTabIndex), onClick = {
+                selectedTabIndex = tabIndex
+                getFavoritesList(selectedTabIndex, proverbsViewModel)
+            }) {
                 Icon(
                     painter = painterResource(getResourceOfTab(tabIndex)),
                     contentDescription = tittle
@@ -45,33 +49,43 @@ fun OptionsTabsMenu(proverbsList: List<Proverbs>) {
         }
     }
 
+
     val pagerState = rememberPagerState(pageCount = { tabsTittleList.size })
 
     LaunchedEffect(selectedTabIndex) {
         pagerState.animateScrollToPage(selectedTabIndex)
     }
 
-    LaunchedEffect(pagerState.currentPage,pagerState.isScrollInProgress) {
-        if(!pagerState.isScrollInProgress) {
+    LaunchedEffect(pagerState.currentPage, pagerState.isScrollInProgress) {
+        if (!pagerState.isScrollInProgress) {
             selectedTabIndex = pagerState.currentPage
         }
     }
 
     HorizontalPager(
-        state = pagerState,
-        modifier = Modifier.fillMaxSize(0.9f)
-    )
-    { page ->
-        if(page == 0 ){
-            CardsLazyColumnView(proverbsList = proverbsList)
-        }
-        Text(
-            text = "Page: $page",
-            fontSize = 32.sp,
-            modifier = Modifier.fillMaxSize()
-        )
+        state = pagerState, modifier = Modifier.fillMaxSize(0.9f)
+    ) { page ->
+        SetScreenData(page, proverbsList, favoritesList)
     }
 
+}
+
+@Composable
+private fun SetScreenData(
+    page: Int, proverbsList: List<Proverbs>, favoritesList: List<Proverbs>
+) {
+    when (page) {
+        0 -> ProverbsCardLazyColumnView(proverbsList = proverbsList, page)
+        1 -> FavoritesCardLazyColumnView(favoritesList = favoritesList, page)
+    }
+}
+
+private fun getFavoritesList(
+    selectedTabIndex: Int, proverbsViewModel: ProverbsViewModel
+) {
+    if (selectedTabIndex == 1) {
+        proverbsViewModel.getFavorites()
+    }
 }
 
 private fun isSelected(tabIndex: Int, selectedTabIndex: Int) = tabIndex == selectedTabIndex

@@ -26,7 +26,7 @@ import coil.compose.rememberAsyncImagePainter
 import com.example.clean_test.R
 import com.example.clean_test.domain.entities.Proverbs
 import com.example.clean_test.presentation.view.ui_compose.composables.utils.TextStyles
-import com.example.clean_test.presentation.viewmodel.ProverbsViewModel
+import com.example.clean_test.presentation.viewmodel.FavoritesViewModel
 
 
 const val PROVERBS_PICTURE_DESCRIPTION = "proverbs description"
@@ -84,11 +84,11 @@ fun SetPictureOnElevatedCard(pictureURL: String) {
 
 @Composable
 fun SetFavoritesLogo(modifier: Modifier, currentProverb: Proverbs) {
-    val proverbsViewModel: ProverbsViewModel = hiltViewModel()
-    val isToggled by remember { derivedStateOf { proverbsViewModel.isFavorite(currentProverb) } }
+    val favoritesViewModel: FavoritesViewModel = hiltViewModel()
+    val isToggled by remember { derivedStateOf { favoritesViewModel.isFavorite(currentProverb) } }
     IconButton(onClick = {
-        proverbsViewModel.toggleFavorite(currentProverb)
-        setFavoriteState(isToggled, proverbsViewModel, currentProverb)
+        favoritesViewModel.toggleFavorite(currentProverb)
+        setFavoriteState(isToggled, favoritesViewModel, currentProverb)
     }, modifier = modifier) {
         val icon = getPainterIf(isToggled)
         Image(
@@ -102,11 +102,11 @@ fun SetFavoritesLogo(modifier: Modifier, currentProverb: Proverbs) {
 
 @Composable
 fun SetRemoveLogo(modifier: Modifier, currentProverb: Proverbs) {
-    val proverbsViewModel: ProverbsViewModel = hiltViewModel()
+    val favoritesViewModel: FavoritesViewModel = hiltViewModel()
     IconButton(
         onClick = {
-            proverbsViewModel.toggleFavorite(currentProverb)
-            removeFavorite(proverbsViewModel, currentProverb)
+            favoritesViewModel.toggleFavorite(currentProverb)
+            removeFavorite(favoritesViewModel, currentProverb)
         }, modifier = modifier
     ) {
         val icon = painterResource(R.drawable.trash_icon)
@@ -129,13 +129,13 @@ private fun getPainterIf(isToggled: Boolean): Painter {
     return icon
 }
 
-private fun removeFavorite(proverbsViewModel: ProverbsViewModel, currentProverb: Proverbs) {
+private fun removeFavorite(proverbsViewModel: FavoritesViewModel, currentProverb: Proverbs) {
     proverbsViewModel.removeFavorite(currentProverb)
 }
 
 
 private fun setFavoriteState(
-    isToggled: Boolean, proverbsViewModel: ProverbsViewModel, currentProverb: Proverbs
+    isToggled: Boolean, proverbsViewModel: FavoritesViewModel, currentProverb: Proverbs
 ) = if (isToggled) {
     proverbsViewModel.addFavorite(currentProverb)
 } else {

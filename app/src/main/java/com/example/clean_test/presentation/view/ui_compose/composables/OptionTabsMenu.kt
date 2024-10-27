@@ -20,15 +20,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import com.example.clean_test.R
 import com.example.clean_test.domain.entities.Proverbs
+import com.example.clean_test.presentation.viewmodel.FavoritesViewModel
 import com.example.clean_test.presentation.viewmodel.ProverbsViewModel
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun OptionsTabsMenu(proverbsViewModel: ProverbsViewModel) {
+fun OptionsTabsMenu(proverbsViewModel: ProverbsViewModel, favoritesViewModel: FavoritesViewModel) {
     val tabsTittleList = listOf("Main", "Favorites", "Next")
     var selectedTabIndex by remember { mutableIntStateOf(0) }
     val proverbsList by proverbsViewModel.proverbsList.collectAsState()
-    val favoritesList by proverbsViewModel.favoritesList.collectAsState()
+    val favoritesList by favoritesViewModel.favoritesList.collectAsState()
 
     TabRow(
         selectedTabIndex = selectedTabIndex, modifier = Modifier
@@ -38,7 +39,7 @@ fun OptionsTabsMenu(proverbsViewModel: ProverbsViewModel) {
         tabsTittleList.forEachIndexed { tabIndex, tittle ->
             Tab(selected = isSelected(tabIndex, selectedTabIndex), onClick = {
                 selectedTabIndex = tabIndex
-                getFavoritesList(selectedTabIndex, proverbsViewModel)
+                getFavoritesList(selectedTabIndex, favoritesViewModel)
             }) {
                 Icon(
                     painter = painterResource(getResourceOfTab(tabIndex)),
@@ -81,10 +82,10 @@ private fun SetScreenData(
 }
 
 private fun getFavoritesList(
-    selectedTabIndex: Int, proverbsViewModel: ProverbsViewModel
+    selectedTabIndex: Int, favoritesViewModel: FavoritesViewModel
 ) {
     if (selectedTabIndex == 1) {
-        proverbsViewModel.getFavorites()
+        favoritesViewModel.getFavorites()
     }
 }
 

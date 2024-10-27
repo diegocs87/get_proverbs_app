@@ -6,12 +6,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.ui.platform.ComposeView
 import com.example.clean_test.databinding.ActivityMainBinding
 import com.example.clean_test.presentation.view.ui_compose.screens.ProverbsMainScreen
+import com.example.clean_test.presentation.viewmodel.FavoritesViewModel
 import com.example.clean_test.presentation.viewmodel.ProverbsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private val proverbsViewModel: ProverbsViewModel by viewModels()
+    private val favoritesViewModel: FavoritesViewModel by viewModels()
     private lateinit var mainBinding: ActivityMainBinding
     private lateinit var composeView: ComposeView
 
@@ -29,7 +31,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initView(proverbsViewModel: ProverbsViewModel) {
         composeView.setContent {
-            ProverbsMainScreen(proverbsViewModel = proverbsViewModel, context = this@MainActivity)
+            ProverbsMainScreen(proverbsViewModel = proverbsViewModel, favoritesViewModel = favoritesViewModel, context = this@MainActivity)
         }
     }
 }

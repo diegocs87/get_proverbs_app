@@ -104,7 +104,10 @@ fun SetFavoritesLogo(modifier: Modifier, currentProverb: Proverbs) {
 fun SetRemoveLogo(modifier: Modifier, currentProverb: Proverbs) {
     val proverbsViewModel: ProverbsViewModel = hiltViewModel()
     IconButton(
-        onClick = { removeFavorite(proverbsViewModel, currentProverb) }, modifier = modifier
+        onClick = {
+            proverbsViewModel.toggleFavorite(currentProverb)
+            removeFavorite(proverbsViewModel, currentProverb)
+        }, modifier = modifier
     ) {
         val icon = painterResource(R.drawable.trash_icon)
         Image(

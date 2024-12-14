@@ -1,0 +1,107 @@
+[versions]
+##Libs
+activityCompose = "1.9.0"
+activityKtx = "1.2.2"
+appcompat = "1.6.1"
+coilCompose = "2.2.2"
+composeBom = "2024.02.00"
+constraintlayout = "2.1.4"
+coreKtx = "1.9.0"
+espressoCore = "3.5.1"
+hiltAndroid = "2.47"
+hiltNavigationCompose = "1.2.0"
+junit = "4.13.2"
+junitVersion = "1.1.5"
+kotlinxCoroutinesTest = "1.6.4"
+lifecycleLivedataKtx = "2.3.1"
+lifecycleViewmodelKtx = "2.6.2"
+material = "1.8.0"
+mockk = "1.12.0"
+pagingCompose = "1.0.0-alpha17"
+retrofit = "2.9.0"
+robolectric = "4.12.1"
+roomRuntime = "2.5.0"
+
+##plugins
+androidApplication = "8.1.1"
+jetBrainsVersion = "1.9.10"
+devToolsKsp = "1.9.10-1.0.13"
+androidDaggerHilt = "2.47"
+
+[libraries]
+
+#Compatibility Libraries
+androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
+
+#Core Libraries
+androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
+
+#Activity
+androidx-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "activityKtx" }
+
+#UI Design Android
+androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" }
+
+#Compose
+androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
+androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "composeBom" }
+androidx-ui = { module = "androidx.compose.ui:ui" }
+androidx-ui-graphics = { module = "androidx.compose.ui:ui-graphics" }
+androidx-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
+androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
+androidx-runtime = { module = "androidx.compose.runtime:runtime" }
+
+#Coil-compose
+coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
+
+#Material Design
+material = { module = "com.google.android.material:material", version.ref = "material" }
+androidx-material3 = { module = "androidx.compose.material3:material3" }
+
+#LiveData
+androidx-lifecycle-livedata-ktx = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycleLivedataKtx" }
+
+#viewModel
+androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
+
+#Paging
+androidx-paging-compose = { module = "androidx.paging:paging-compose", version.ref = "pagingCompose" }
+
+#Room
+androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomRuntime" }
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomRuntime" }
+
+
+#Retrofit
+converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+
+#Hilt
+hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
+hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltAndroid"}
+
+#Coroutines
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesTest" }
+
+## Testing ###
+
+#Roboelectric
+robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
+
+#Espresso
+androidx-espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espressoCore" }
+
+#Junit
+androidx-junit = { module = "androidx.test.ext:junit", version.ref = "junitVersion" }
+junit = { module = "junit:junit", version.ref = "junit" }
+
+#Mockk
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
+
+
+[plugins]
+android-application = { id = "com.android.application" , version.ref = "androidApplication"}
+android-jetbrains-kotlin = { id = "org.jetbrains.kotlin.android" , version.ref = "jetBrainsVersion"}
+devtools-ksp = { id = "com.google.devtools.ksp" , version.ref = "devToolsKsp"}
+android-dagger-hilt = { id = "com.google.dagger.hilt.android" , version.ref = "androidDaggerHilt"}

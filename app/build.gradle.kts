@@ -50,48 +50,48 @@ android {
 }
 
 dependencies {
-    implementation("androidx.core:core-ktx:1.9.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.8.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
+    implementation(libs.androidx.constraintlayout)
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
+    testImplementation (libs.kotlinx.coroutines.test)
     // Activity
-    implementation ("androidx.activity:activity-ktx:1.2.2")
+    implementation (libs.androidx.activity.ktx)
     // ViewModel
-    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
+    implementation (libs.androidx.lifecycle.viewmodel.ktx)
     // LiveData
-    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.3.1")
+    implementation (libs.androidx.lifecycle.livedata.ktx)
     // Room
-    implementation ("androidx.room:room-runtime:${rootProject.extra["room_version"]}")
-    kapt ("androidx.room:room-compiler:${rootProject.extra["room_version"]}")
-    implementation ("androidx.room:room-ktx:${rootProject.extra["room_version"]}")
+    implementation (libs.androidx.room.runtime)
+    ksp (libs.androidx.room.compiler)
+    implementation (libs.androidx.room.ktx)
     // mockk
-    implementation ("io.mockk:mockk:1.12.0")
+    implementation (libs.mockk)
     // robolectric
-    testImplementation ("junit:junit:4.13.2")
-    testImplementation ("org.robolectric:robolectric:4.12.1")
+    testImplementation (libs.junit)
+    testImplementation (libs.robolectric)
     // Retrofit
-    implementation ("com.squareup.retrofit2:retrofit:${rootProject.extra["retrofit_version"]}")
-    implementation ("com.squareup.retrofit2:converter-gson:${rootProject.extra["retrofit_version"]}")
+    implementation (libs.retrofit)
+    implementation (libs.converter.gson)
     // Dagger Hilt
-    implementation("com.google.dagger:hilt-android:${rootProject.extra["hilt_version"]}")
-    kapt("com.google.dagger:hilt-android-compiler:${rootProject.extra["hilt_version"]}")
-    implementation ("androidx.hilt:hilt-navigation-compose:1.2.0")
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
+    implementation (libs.androidx.hilt.navigation.compose)
     //Compose
-    implementation (platform("androidx.compose:compose-bom:2024.02.00"))
-    implementation ("androidx.compose.ui:ui")
-    implementation("androidx.compose.material3:material3")
-    implementation ("androidx.compose.runtime:runtime")
-    implementation ("androidx.activity:activity-compose:1.9.0")
-    implementation ("androidx.compose.ui:ui-graphics")
-    implementation ("androidx.compose.ui:ui-tooling-preview")
+    implementation (platform(libs.androidx.compose.bom))
+    implementation (libs.androidx.ui)
+    implementation(libs.androidx.material3)
+    implementation (libs.androidx.runtime)
+    implementation (libs.androidx.activity.compose)
+    implementation (libs.androidx.ui.graphics)
+    implementation (libs.androidx.ui.tooling.preview)
     // paging
-    implementation ("androidx.paging:paging-compose:1.0.0-alpha17")
+    implementation (libs.androidx.paging.compose)
     // coil
-    implementation ("io.coil-kt:coil-compose:2.2.2")
+    implementation (libs.coil.compose)
 }
 
 kapt {

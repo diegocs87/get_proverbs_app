@@ -3,7 +3,7 @@ package com.example.clean_test.presentation.viewmodel
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.clean_test.domain.entities.Proverbs
+import com.example.clean_test.domain.entities.ProverbsStates
 import com.example.clean_test.domain.usecases.GetProverbsUseCase
 import com.example.clean_test.presentation.di.qualifiers.GetProverbsUseCaseImplementationQualifier
 import com.example.clean_test.presentation.di.qualifiers.IODispatcher
@@ -21,10 +21,10 @@ class ProverbsViewModel
     @GetProverbsUseCaseImplementationQualifier private val getProverbsUseCase: GetProverbsUseCase,
     @IODispatcher private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
-    private var randomProverb = emptyList<Proverbs>()
-    private val _proverbsList = MutableStateFlow(randomProverb)
-    val proverbsList: StateFlow<List<Proverbs>> get() = _proverbsList
-    private lateinit var proverbs: List<Proverbs>
+    private var initialProverbsState:ProverbsStates = ProverbsStates.Loading
+    private val _proverbsState = MutableStateFlow(initialProverbsState)
+    val proverbsList: StateFlow<ProverbsStates> get() = _proverbsState
+    private lateinit var proverbs: ProverbsStates
 
     fun update(context: Context) {
         viewModelScope.launch {
@@ -36,9 +36,7 @@ class ProverbsViewModel
     }
 
     private fun updateCurrentProverbWithRetrievedData() {
-        if (proverbs.isNotEmpty()) {
-            _proverbsList.value = proverbs
-        }
+        _proverbsState.value = proverbs
     }
 }
 

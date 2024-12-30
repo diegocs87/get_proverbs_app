@@ -20,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import com.example.clean_test.R
 import com.example.clean_test.domain.entities.Proverbs
+import com.example.clean_test.domain.entities.ProverbsStates
 import com.example.clean_test.presentation.viewmodel.FavoritesViewModel
 import com.example.clean_test.presentation.viewmodel.ProverbsViewModel
 
@@ -73,13 +74,23 @@ fun OptionsTabsMenu(proverbsViewModel: ProverbsViewModel, favoritesViewModel: Fa
 
 @Composable
 private fun SetScreenData(
-    page: Int, proverbsList: List<Proverbs>, favoritesList: List<Proverbs>
+    page: Int, proverbsState: ProverbsStates, favoritesList: List<Proverbs>
 ) {
     when (page) {
-        0 -> ProverbsCardLazyColumnView(proverbsList = proverbsList, page)
+        0 -> SetProverbsScreenState(proverbsState,page)
         1 -> FavoritesCardLazyColumnView(favoritesList = favoritesList, page)
     }
 }
+
+@Composable
+private fun SetProverbsScreenState(proverbsState: ProverbsStates,page: Int){
+    when(proverbsState){
+        ProverbsStates.Loading -> Text("Loading")
+        is ProverbsStates.OnError -> Text(proverbsState.errorMsg)
+        is ProverbsStates.OnSuccessRetrieved -> ProverbsCardLazyColumnView(proverbsList = proverbsState.retrievedProverbs, page)
+    }
+}
+
 
 private fun getFavoritesList(
     selectedTabIndex: Int, favoritesViewModel: FavoritesViewModel
@@ -95,7 +106,7 @@ private fun getResourceOfTab(id: Int): Int {
     return when (id) {
         0 -> R.drawable.main_icon
         1 -> R.drawable.fav_icon
-        3 -> R.drawable.next_icon
+        2 -> R.drawable.next_icon
         else -> R.drawable.main_icon
     }
 }

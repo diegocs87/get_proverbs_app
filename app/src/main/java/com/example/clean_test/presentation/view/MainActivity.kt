@@ -26,10 +26,10 @@ class MainActivity : AppCompatActivity() {
         mainBinding = ActivityMainBinding.inflate(layoutInflater)
         composeView = mainBinding.mainComposeContainer
         setContentView(mainBinding.root)
-        initView(proverbsViewModel)
+        initView()
     }
 
-    private fun initView(proverbsViewModel: ProverbsViewModel) {
+    private fun initView() {
         composeView.setContent {
             ProverbsMainScreen(proverbsViewModel = proverbsViewModel, favoritesViewModel = favoritesViewModel, context = this@MainActivity)
         }

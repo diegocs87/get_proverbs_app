@@ -1,8 +1,8 @@
 package com.example.clean_test.domain.usecases
 
 import android.content.Context
-import com.example.clean_test.domain.entities.Proverbs
+import com.example.clean_test.domain.entities.ProverbsStates
 
 interface GetProverbsUseCase {
-    suspend fun get(context: Context):List<Proverbs>
+    suspend fun get(context: Context): ProverbsStates
 }
